@@ -47,7 +47,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; f
 .charts-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-bottom: 18px; }
 .charts-grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-bottom: 18px; }
 .chart-card { background: #fff; border-radius: 10px; border: 1px solid #e5e5e3; padding: 16px; min-width: 0; overflow: hidden; }
-.chart-title { font-size: 12px; font-weight: 600; color: #333; margin-bottom: 12px; }
+.chart-title { font-size: 12px; font-weight: 600; color: #333; margin-bottom: 12px; display: flex; align-items: center; gap: 5px; }
+.info-icon { display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; border-radius: 50%; background: #e5e7eb; color: #6b7280; font-size: 9px; font-weight: 700; cursor: default; flex-shrink: 0; position: relative; font-style: normal; line-height: 1; }
+.info-icon:hover { background: #d1d5db; color: #374151; }
+.info-icon .info-tip { display: none; position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: #1f2937; color: #f9fafb; font-size: 11px; font-weight: 400; line-height: 1.5; padding: 8px 10px; border-radius: 7px; white-space: normal; width: 220px; z-index: 9999; pointer-events: none; box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
+.info-icon .info-tip::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-top-color: #1f2937; }
+.info-icon:hover .info-tip { display: block; }
 .chart-sub { font-size: 11px; color: #888; margin-top: -8px; margin-bottom: 12px; }
 .chart-wrap { position: relative; height: 200px; width: 100%; overflow: hidden; }
 .section { background: #fff; border-radius: 10px; border: 1px solid #e5e5e3; padding: 16px; margin-bottom: 14px; }
@@ -173,9 +178,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; f
       <div class="metric-card ok"><div class="metric-label">Avg contract value</div><div class="metric-value">$284K</div></div>
     </div>
     <div class="charts-grid">
-      <div class="chart-card"><div class="chart-title">Contracts by renewal type</div><div class="chart-wrap"><canvas id="renewalChart"></canvas></div></div>
-      <div class="chart-card"><div class="chart-title">Expiring by month</div><div class="chart-wrap"><canvas id="timelineChart"></canvas></div></div>
-      <div class="chart-card"><div class="chart-title">Top counterparties (expiring)</div><div class="chart-wrap"><canvas id="partyChart"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Contracts by renewal type<i class="info-icon">i<span class="info-tip">Breaks down your portfolio by how each contract renews — auto-renew, fixed term, evergreen, or no renewal clause. Helps identify exposure to unmanaged auto-renewals.</span></i></div><div class="chart-wrap"><canvas id="renewalChart"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Expiring by month<i class="info-icon">i<span class="info-tip">Shows how many contracts expire each month over the next four months. Use this to prioritize renewal outreach and avoid missed deadlines.</span></i></div><div class="chart-wrap"><canvas id="timelineChart"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Top counterparties (expiring)<i class="info-icon">i<span class="info-tip">Ranks counterparties by number of contracts expiring soon. Counterparties with multiple expiring agreements may warrant a consolidated renegotiation.</span></i></div><div class="chart-wrap"><canvas id="partyChart"></canvas></div></div>
     </div>
     <div class="section">
       <div class="section-header"><div class="section-title">Suggested action items <span class="badge badge-blue">6 items</span> <span style="font-size:11px;font-weight:400;color:#aaa;">0 of 6 done</span></div></div>
@@ -246,12 +251,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; f
       <div class="metric-card"><div class="metric-label">Added last 7 days</div><div class="metric-value">3</div><div class="metric-sub">new agreements</div></div>
     </div>
     <div class="charts-grid-2">
-      <div class="chart-card"><div class="chart-title">Spend by agreement type</div><div class="chart-sub">Total contract value</div><div class="chart-wrap"><canvas id="spendChart"></canvas></div></div>
-      <div class="chart-card"><div class="chart-title">Portfolio value over time</div><div class="chart-sub">By agreement effective date</div><div class="chart-wrap"><canvas id="valueChart"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Spend by agreement type<i class="info-icon">i<span class="info-tip">Total contracted value grouped by agreement category (MSA, SaaS, services, etc.). Highlights which agreement types carry the most financial weight in your portfolio.</span></i></div><div class="chart-sub">Total contract value</div><div class="chart-wrap"><canvas id="spendChart"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Portfolio value over time<i class="info-icon">i<span class="info-tip">Cumulative contract value plotted by each agreement's effective (start) date. Rising trends indicate accelerating spend commitments; flat periods suggest slower contracting activity.</span></i></div><div class="chart-sub">By agreement effective date</div><div class="chart-wrap"><canvas id="valueChart"></canvas></div></div>
     </div>
     <div class="chart-card" style="margin-bottom:14px;">
       <div style="margin-bottom:10px;">
-        <div class="chart-title" style="margin-bottom:2px;">Renewal value forecast — next 12 months</div>
+        <div class="chart-title" style="margin-bottom:2px;">Renewal value forecast — next 12 months<i class="info-icon">i<span class="info-tip">Projects portfolio value over 12 months based on how expiring contracts renew. Adjust the percentages to model scenarios: 100% = flat (all renew at same value), 120% = 20% net growth, 70% = 30% of expiring value is lost.</span></i></div>
         <div style="font-size:11px;color:#888;">Each scenario represents the % of expiring contract value retained or replaced. Values above 100% indicate net growth.</div>
       </div>
       <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;">
