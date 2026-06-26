@@ -11,10 +11,11 @@
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; color: #1a1a1a; background: #f5f5f3; }
 .demo-banner { background: #1e40af; color: #fff; text-align: center; padding: 7px 16px; font-size: 12px; letter-spacing: 0.2px; }
 .demo-banner strong { font-weight: 600; }
-.header { background: #fff; border-bottom: 1px solid #e5e5e3; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 200; }
+.header { background: #fff; border-bottom: 1px solid #e5e5e3; padding: 10px 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 200; gap: 12px; flex-wrap: wrap; }
 .header-left h1 { font-size: 16px; font-weight: 600; }
 .header-left p { font-size: 11px; color: #888; margin-top: 1px; }
-.btn { padding: 6px 13px; border-radius: 7px; border: 1px solid #ddd; background: #fff; font-size: 12px; cursor: pointer; color: #333; display: inline-flex; align-items: center; gap: 5px; transition: background 0.15s; }
+.header-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.btn { padding: 6px 13px; border-radius: 7px; border: 1px solid #ddd; background: #fff; font-size: 12px; cursor: pointer; color: #333; display: inline-flex; align-items: center; gap: 5px; transition: all 0.15s; }
 .btn:hover { background: #f5f5f3; }
 .btn-primary { background: #2563eb; color: #fff; border-color: #2563eb; }
 .btn-primary:hover { background: #1d4ed8; }
@@ -22,21 +23,67 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; f
 .btn-view { padding: 3px 9px; border-radius: 5px; border: 1px solid #ddd; background: #fff; font-size: 11px; cursor: pointer; color: #2563eb; font-weight: 500; }
 .btn-view:hover { background: #eff6ff; border-color: #2563eb; }
 .link-btn { background: none; border: none; color: #2563eb; font-size: 11px; cursor: pointer; padding: 0; text-decoration: underline; }
+
+/* ── Persona switcher ── */
+.persona-switcher { display: flex; background: #f3f4f6; border-radius: 8px; padding: 3px; gap: 2px; }
+.persona-btn { padding: 5px 12px; border-radius: 6px; border: none; background: transparent; font-size: 11px; font-weight: 500; cursor: pointer; color: #555; transition: all 0.15s; white-space: nowrap; }
+.persona-btn.active { background: #fff; color: #1a1a1a; box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+.persona-btn.active.cfo { color: #1d4ed8; }
+.persona-btn.active.legal { color: #7c3aed; }
+.persona-btn.active.ops { color: #16a34a; }
+.persona-banner { display: none; padding: 8px 24px; font-size: 12px; font-weight: 500; border-bottom: 1px solid rgba(0,0,0,0.06); }
+.persona-banner.cfo { background: #eff6ff; color: #1e40af; display: block; }
+.persona-banner.legal { background: #f5f3ff; color: #5b21b6; display: block; }
+.persona-banner.ops { background: #f0fdf4; color: #166534; display: block; }
+.metric-card.persona-highlight { box-shadow: 0 0 0 2px #2563eb; }
+.metric-card.persona-highlight.legal { box-shadow: 0 0 0 2px #7c3aed; }
+.metric-card.persona-highlight.ops { box-shadow: 0 0 0 2px #16a34a; }
+
+/* ── Before/After toggle ── */
+.ba-toggle { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 7px; border: 1px solid #ddd; background: #fff; font-size: 12px; cursor: pointer; font-weight: 500; color: #333; transition: all 0.15s; }
+.ba-toggle:hover { border-color: #2563eb; color: #2563eb; }
+.ba-toggle .ba-dot { width: 8px; height: 8px; border-radius: 50%; background: #dc2626; }
+.ba-toggle.after .ba-dot { background: #16a34a; }
+
+/* ── Before view (spreadsheet) ── */
+#before-view { display: none; }
+#before-view.active { display: block; }
+#dashboard-view.hidden { display: none; }
+.before-header { background: #fff; border-bottom: 2px solid #e5e5e3; padding: 10px 24px; display: flex; align-items: center; justify-content: space-between; }
+.before-header h2 { font-size: 14px; font-weight: 600; color: #333; }
+.before-header p { font-size: 11px; color: #dc2626; margin-top: 2px; }
+.spreadsheet-wrap { padding: 20px 24px; overflow-x: auto; }
+.spreadsheet-note { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #92400e; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.ss-table { border-collapse: collapse; font-size: 12px; min-width: 900px; width: 100%; background: #fff; border: 1px solid #d1d5db; }
+.ss-table th { background: #f3f4f6; text-align: left; padding: 6px 10px; font-size: 11px; font-weight: 600; color: #374151; border: 1px solid #d1d5db; white-space: nowrap; }
+.ss-table td { padding: 6px 10px; border: 1px solid #e5e7eb; vertical-align: middle; white-space: nowrap; }
+.ss-table tr:nth-child(even) td { background: #fafafa; }
+.ss-missing { color: #dc2626; font-style: italic; }
+.ss-status-urgent { background: #fee2e2; color: #dc2626; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: 600; }
+.ss-status-ok { background: #dcfce7; color: #16a34a; padding: 2px 6px; border-radius: 3px; font-size: 10px; }
+.ss-status-warn { background: #fef3c7; color: #d97706; padding: 2px 6px; border-radius: 3px; font-size: 10px; }
+.ss-status-manual { background: #f3f4f6; color: #6b7280; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-style: italic; }
+
+/* ── Controls bar ── */
 .controls-bar { background: #fff; border-bottom: 1px solid #e5e5e3; padding: 0 24px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .range-tabs { display: flex; gap: 4px; align-items: center; padding: 10px 0; }
 .range-tab { padding: 5px 12px; border-radius: 20px; border: 1px solid #ddd; background: transparent; font-size: 12px; cursor: pointer; color: #555; transition: all 0.15s; }
 .range-tab.active { background: #2563eb; color: #fff; border-color: #2563eb; }
 .range-tab:hover:not(.active) { background: #f0f0f0; }
 .range-label { font-size: 11px; color: #888; margin-right: 4px; }
-.main-nav { background: #fff; border-bottom: 1px solid #e5e5e3; padding: 0 24px; display: flex; gap: 0; }
+
+/* ── Nav ── */
+.main-nav { background: #fff; border-bottom: 1px solid #e5e5e3; padding: 0 24px; display: flex; gap: 0; overflow-x: auto; }
 .main-tab { padding: 11px 16px; font-size: 13px; cursor: pointer; color: #666; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.15s; white-space: nowrap; }
 .main-tab:hover { color: #333; }
 .main-tab.active { color: #2563eb; border-bottom-color: #2563eb; font-weight: 500; }
 .main { padding: 20px 24px; max-width: 1400px; }
 .main-pane { display: none; }
 .main-pane.active { display: block; }
+
+/* ── Metrics ── */
 .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 18px; }
-.metric-card { background: #fff; border-radius: 10px; border: 1px solid #e5e5e3; padding: 14px 16px; }
+.metric-card { background: #fff; border-radius: 10px; border: 1px solid #e5e5e3; padding: 14px 16px; transition: box-shadow 0.2s; }
 .metric-label { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
 .metric-value { font-size: 26px; font-weight: 600; color: #1a1a1a; line-height: 1; }
 .metric-sub { font-size: 10px; color: #aaa; margin-top: 4px; }
@@ -44,17 +91,23 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; f
 .metric-card.warn .metric-value { color: #d97706; }
 .metric-card.ok .metric-value { color: #16a34a; }
 .metric-card.info .metric-value { color: #2563eb; }
+
+/* ── Charts ── */
 .charts-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-bottom: 18px; }
 .charts-grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-bottom: 18px; }
-.chart-card { background: #fff; border-radius: 10px; border: 1px solid #e5e5e3; padding: 16px; min-width: 0; overflow: hidden; }
+.chart-card { background: #fff; border-radius: 10px; border: 1px solid #e5e5e3; padding: 16px; min-width: 0; overflow: visible; }
 .chart-title { font-size: 12px; font-weight: 600; color: #333; margin-bottom: 12px; display: flex; align-items: center; gap: 5px; }
+.chart-sub { font-size: 11px; color: #888; margin-top: -8px; margin-bottom: 12px; }
+.chart-wrap { position: relative; height: 200px; width: 100%; overflow: hidden; }
+
+/* ── Info icon tooltip ── */
 .info-icon { display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; border-radius: 50%; background: #e5e7eb; color: #6b7280; font-size: 9px; font-weight: 700; cursor: default; flex-shrink: 0; position: relative; font-style: normal; line-height: 1; }
 .info-icon:hover { background: #d1d5db; color: #374151; }
 .info-icon .info-tip { display: none; position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: #1f2937; color: #f9fafb; font-size: 11px; font-weight: 400; line-height: 1.5; padding: 8px 10px; border-radius: 7px; white-space: normal; width: 220px; z-index: 9999; pointer-events: none; box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
 .info-icon .info-tip::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-top-color: #1f2937; }
 .info-icon:hover .info-tip { display: block; }
-.chart-sub { font-size: 11px; color: #888; margin-top: -8px; margin-bottom: 12px; }
-.chart-wrap { position: relative; height: 200px; width: 100%; overflow: hidden; }
+
+/* ── Sections ── */
 .section { background: #fff; border-radius: 10px; border: 1px solid #e5e5e3; padding: 16px; margin-bottom: 14px; }
 .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
 .section-title { font-size: 13px; font-weight: 600; color: #1a1a1a; display: flex; align-items: center; gap: 7px; }
@@ -64,7 +117,27 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; f
 .badge-blue { background: #eff6ff; color: #2563eb; }
 .badge-green { background: #f0fdf4; color: #16a34a; }
 .badge-gray { background: #f3f4f6; color: #6b7280; }
+.badge-purple { background: #f5f3ff; color: #7c3aed; }
 .chip { padding: 2px 7px; border-radius: 10px; font-size: 10px; border: 1px solid #e5e5e3; color: #555; background: #fafafa; white-space: nowrap; }
+
+/* ── AI risk summary ── */
+.ai-summary-card { background: linear-gradient(135deg, #f0f7ff 0%, #f5f3ff 100%); border: 1px solid #c7d2fe; border-radius: 10px; padding: 14px 16px; margin-bottom: 18px; display: flex; gap: 12px; align-items: flex-start; }
+.ai-summary-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+.ai-summary-label { font-size: 10px; font-weight: 600; color: #4338ca; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.ai-summary-text { font-size: 13px; color: #1e1b4b; line-height: 1.6; }
+.ai-summary-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.ai-chip { padding: 3px 9px; border-radius: 20px; font-size: 11px; border: 1px solid #c7d2fe; background: #fff; color: #4338ca; cursor: pointer; }
+.ai-chip:hover { background: #e0e7ff; }
+
+/* ── Dollar value at risk ── */
+.risk-bar { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+.risk-bar-row { display: flex; align-items: center; gap: 10px; }
+.risk-bar-label { font-size: 11px; color: #555; width: 170px; flex-shrink: 0; }
+.risk-bar-track { flex: 1; height: 8px; background: #f0f0ee; border-radius: 4px; overflow: hidden; }
+.risk-bar-fill { height: 100%; border-radius: 4px; }
+.risk-bar-val { font-size: 11px; font-weight: 600; min-width: 60px; text-align: right; flex-shrink: 0; }
+
+/* ── Action items ── */
 .action-item { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid #f0f0ee; align-items: flex-start; }
 .action-item:last-child { border-bottom: none; padding-bottom: 0; }
 .action-check { width: 15px; height: 15px; margin-top: 2px; flex-shrink: 0; accent-color: #2563eb; }
@@ -76,6 +149,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; f
 .action-title { font-size: 13px; font-weight: 500; color: #1a1a1a; margin-bottom: 2px; }
 .action-desc { font-size: 12px; color: #777; line-height: 1.5; }
 .action-meta { font-size: 11px; color: #bbb; margin-top: 3px; display: flex; align-items: center; gap: 8px; }
+
+/* ── Concentration bars ── */
 .conc-bar-row { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 1px solid #f0f0ee; }
 .conc-bar-row:last-child { border-bottom: none; }
 .conc-bar-label { font-size: 12px; color: #333; width: 160px; flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -84,6 +159,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; f
 .conc-bar-fill.high { background: #dc2626; }
 .conc-bar-fill.medium { background: #d97706; }
 .conc-bar-val { font-size: 11px; color: #555; min-width: 80px; text-align: right; flex-shrink: 0; }
+
+/* ── Kanban ── */
 .kanban-board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .kanban-col { background: #f8f8f6; border-radius: 10px; padding: 12px; min-height: 200px; }
 .kanban-col-header { font-size: 11px; font-weight: 600; color: #555; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; }
@@ -94,20 +171,21 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; f
 .kanban-card-chips { display: flex; gap: 4px; margin-top: 6px; flex-wrap: wrap; }
 .kanban-card.kanban-urgent { border-left: 3px solid #dc2626; }
 .kanban-card.kanban-warn { border-left: 3px solid #d97706; }
+
+/* ── Obligations table ── */
 .ob-filter-bar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
 .ob-filter-bar input { padding: 5px 10px; border-radius: 6px; border: 1px solid #ddd; font-size: 12px; color: #333; flex: 1; min-width: 140px; }
 .ob-filter-bar select { padding: 5px 10px; border-radius: 6px; border: 1px solid #ddd; font-size: 12px; color: #333; background: #fff; }
 .ob-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-.ob-table th { text-align: left; padding: 7px 10px; font-size: 10px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.4px; border-bottom: 2px solid #e5e5e3; white-space: nowrap; cursor: pointer; user-select: none; }
-.ob-table th:hover { color: #333; }
-.ob-table th.sorted { color: #2563eb; }
+.ob-table th { text-align: left; padding: 7px 10px; font-size: 10px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.4px; border-bottom: 2px solid #e5e5e3; white-space: nowrap; }
 .ob-table td { padding: 9px 10px; border-bottom: 1px solid #f0f0ee; vertical-align: middle; }
 .ob-table tr:last-child td { border-bottom: none; }
 .ob-table tr:hover td { background: #fafafa; }
 .ob-td-name-main { font-weight: 500; color: #1a1a1a; }
 .ob-td-name-sub { font-size: 10px; color: #888; margin-top: 1px; }
 .ob-pager { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; font-size: 11px; color: #888; }
-.ob-pager-btns { display: flex; gap: 4px; }
+
+/* ── Audit ── */
 .audit-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f0f0ee; }
 .audit-row:last-child { border-bottom: none; }
 .audit-label { flex: 1; font-size: 12px; color: #333; }
@@ -121,10 +199,24 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; f
 .velocity-avg { font-size: 13px; font-weight: 600; color: #1a1a1a; }
 .velocity-bar-track { flex: 1; height: 6px; background: #f0f0ee; border-radius: 3px; overflow: hidden; }
 .velocity-bar-fill { height: 100%; border-radius: 3px; background: #7c3aed; }
+
+/* ── Compliance gap table ── */
+.gap-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.gap-table th { text-align: center; padding: 7px 8px; font-size: 10px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.4px; border-bottom: 2px solid #e5e5e3; }
+.gap-table th.left { text-align: left; }
+.gap-table td { padding: 8px; border-bottom: 1px solid #f0f0ee; text-align: center; }
+.gap-table td.left { text-align: left; }
+.gap-table tr:last-child td { border-bottom: none; }
+.gap-table tr:hover td { background: #fafafa; }
+.gap-ok { color: #16a34a; font-size: 14px; }
+.gap-miss { color: #dc2626; font-size: 14px; }
+.gap-summary { background: #f8f8f6; font-weight: 600; font-size: 11px; }
+
+/* ── Modals ── */
 .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 500; align-items: flex-start; justify-content: center; padding: 20px; overflow-y: auto; }
 .modal-overlay.open { display: flex; }
-.modal-box { background: #fff; border-radius: 12px; width: 100%; max-width: 620px; box-shadow: 0 8px 40px rgba(0,0,0,0.18); margin: auto; }
-.modal-header { display: flex; align-items: flex-start; justify-content: space-between; padding: 16px 20px 12px; border-bottom: 1px solid #f0f0ee; border-radius: 12px 12px 0 0; }
+.modal-box { background: #fff; border-radius: 12px; width: 100%; max-width: 640px; box-shadow: 0 8px 40px rgba(0,0,0,0.18); margin: auto; }
+.modal-header { display: flex; align-items: flex-start; justify-content: space-between; padding: 16px 20px 12px; border-bottom: 1px solid #f0f0ee; }
 .modal-title { font-size: 14px; font-weight: 600; }
 .modal-sub { font-size: 11px; color: #888; margin-top: 2px; }
 .modal-close { background: none; border: 1px solid #e5e5e3; border-radius: 5px; font-size: 14px; cursor: pointer; color: #888; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; }
@@ -133,21 +225,117 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; f
 .kv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .kv-label { font-size: 10px; color: #888; margin-bottom: 2px; }
 .kv-value { font-size: 12px; color: #1a1a1a; font-weight: 500; }
+
+/* ── AI brief in modal ── */
+.ai-brief { background: linear-gradient(135deg, #f0f7ff 0%, #f5f3ff 100%); border: 1px solid #c7d2fe; border-radius: 8px; padding: 12px 14px; margin-top: 14px; }
+.ai-brief-label { font-size: 10px; font-weight: 600; color: #4338ca; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
+.ai-brief-text { font-size: 12px; color: #1e1b4b; line-height: 1.7; }
+.ai-brief-flags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.ai-flag { padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 500; background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+
+/* ── Send for signature ── */
+.sig-form { display: flex; flex-direction: column; gap: 12px; }
+.sig-field { display: flex; flex-direction: column; gap: 4px; }
+.sig-label { font-size: 11px; font-weight: 600; color: #555; }
+.sig-input { padding: 8px 10px; border-radius: 6px; border: 1px solid #ddd; font-size: 13px; color: #1a1a1a; font-family: inherit; }
+.sig-input:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+.sig-textarea { padding: 8px 10px; border-radius: 6px; border: 1px solid #ddd; font-size: 13px; color: #1a1a1a; font-family: inherit; min-height: 80px; resize: vertical; }
+.sig-textarea:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+.sig-recipient-row { display: flex; gap: 8px; align-items: flex-end; }
+.sig-recipient-row .sig-field { flex: 1; }
+.sig-success { text-align: center; padding: 24px 20px; }
+.sig-success-icon { font-size: 48px; margin-bottom: 12px; }
+.sig-success-title { font-size: 16px; font-weight: 600; color: #16a34a; margin-bottom: 6px; }
+.sig-success-text { font-size: 13px; color: #555; line-height: 1.6; }
+.sig-docusign-btn { background: #ffb900; color: #1a1a1a; border: none; border-radius: 7px; padding: 10px 20px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; width: 100%; justify-content: center; margin-top: 4px; transition: background 0.15s; }
+.sig-docusign-btn:hover { background: #f0ac00; }
+
+/* ── NL Query floating panel ── */
+.nl-fab { position: fixed; bottom: 24px; right: 24px; z-index: 400; background: #1e40af; color: #fff; border: none; border-radius: 28px; padding: 12px 18px; font-size: 13px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 16px rgba(30,64,175,0.4); display: flex; align-items: center; gap: 8px; transition: all 0.2s; }
+.nl-fab:hover { background: #1d4ed8; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(30,64,175,0.5); }
+.nl-panel { position: fixed; bottom: 80px; right: 24px; z-index: 400; width: 360px; background: #fff; border-radius: 14px; box-shadow: 0 8px 40px rgba(0,0,0,0.18); border: 1px solid #e5e5e3; display: none; flex-direction: column; max-height: 480px; }
+.nl-panel.open { display: flex; }
+.nl-panel-header { padding: 14px 16px 10px; border-bottom: 1px solid #f0f0ee; display: flex; align-items: center; justify-content: space-between; }
+.nl-panel-title { font-size: 13px; font-weight: 600; color: #1e40af; display: flex; align-items: center; gap: 7px; }
+.nl-close { background: none; border: none; font-size: 16px; cursor: pointer; color: #aaa; }
+.nl-close:hover { color: #333; }
+.nl-chips { padding: 10px 12px; display: flex; flex-wrap: wrap; gap: 6px; border-bottom: 1px solid #f0f0ee; }
+.nl-chip { padding: 4px 10px; border-radius: 20px; background: #eff6ff; border: 1px solid #bfdbfe; color: #1d4ed8; font-size: 11px; cursor: pointer; transition: background 0.15s; }
+.nl-chip:hover { background: #dbeafe; }
+.nl-convo { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 10px; min-height: 80px; }
+.nl-msg { max-width: 85%; }
+.nl-msg.user { align-self: flex-end; background: #2563eb; color: #fff; border-radius: 12px 12px 2px 12px; padding: 8px 12px; font-size: 12px; }
+.nl-msg.ai { align-self: flex-start; background: #f3f4f6; color: #1a1a1a; border-radius: 12px 12px 12px 2px; padding: 8px 12px; font-size: 12px; line-height: 1.5; }
+.nl-input-row { padding: 10px 12px; border-top: 1px solid #f0f0ee; display: flex; gap: 6px; }
+.nl-input { flex: 1; padding: 7px 10px; border-radius: 20px; border: 1px solid #ddd; font-size: 12px; font-family: inherit; }
+.nl-input:focus { outline: none; border-color: #2563eb; }
+.nl-send { padding: 7px 12px; border-radius: 20px; background: #2563eb; color: #fff; border: none; font-size: 12px; cursor: pointer; }
+.nl-send:hover { background: #1d4ed8; }
 </style>
 </head>
 <body>
 
-<div class="demo-banner"><strong>DEMO</strong> — Sample data for illustration purposes. Not connected to live DocuSign data.</div>
+<div class="demo-banner"><strong>DEMO</strong> — Sample data for illustration. Powered by DocuSign MCP + Claude AI.</div>
 
+<!-- ══ HEADER ══ -->
 <div class="header">
   <div class="header-left">
     <h1>Contract Intelligence Dashboard</h1>
-    <p>Sample data · Fontera Inc. · Refreshed Jun 25, 2026</p>
+    <p id="headerSub">Sample data · Fontera Inc. · Refreshed Jun 25, 2026</p>
   </div>
   <div class="header-right">
-    <span class="badge badge-blue" style="font-size:11px;padding:4px 10px;">Demo mode</span>
+    <div class="persona-switcher">
+      <button class="persona-btn active" onclick="setPersona('all',this)">All</button>
+      <button class="persona-btn cfo" onclick="setPersona('cfo',this)">💼 CFO</button>
+      <button class="persona-btn legal" onclick="setPersona('legal',this)">⚖️ Legal</button>
+      <button class="persona-btn ops" onclick="setPersona('ops',this)">🗂 Ops</button>
+    </div>
+    <button class="ba-toggle" id="baToggle" onclick="toggleBeforeAfter()">
+      <span class="ba-dot"></span> Show: Before
+    </button>
   </div>
 </div>
+
+<!-- ══ PERSONA BANNER ══ -->
+<div id="personaBanner" class="persona-banner" style="display:none"></div>
+
+<!-- ══ BEFORE VIEW ══ -->
+<div id="before-view">
+  <div class="before-header">
+    <div>
+      <h2>⚠️ Manual Contract Tracker — Q2 2026</h2>
+      <p>47 contracts tracked manually across 3 spreadsheets · Last updated by Sarah (manually, Jun 10)</p>
+    </div>
+    <span class="badge badge-red" style="font-size:12px;padding:5px 12px;">Before DocuSign MCP</span>
+  </div>
+  <div class="spreadsheet-wrap">
+    <div class="spreadsheet-note">⚠️ This spreadsheet is out of date. 9 contracts have not been reviewed since Q1. Missing expiry dates for 4 agreements. No automated alerts configured.</div>
+    <table class="ss-table">
+      <thead><tr>
+        <th>#</th><th>Counterparty</th><th>Type</th><th>Value</th><th>Effective</th><th>Expiry</th><th>Renewal</th><th>Notice Period</th><th>Liability Cap</th><th>Owner</th><th>Status</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Orion Logistics</td><td>MSA</td><td>$1,200,000</td><td>Jan 2024</td><td style="color:#dc2626;font-weight:600;">Jul 2, 2026 ⚠️</td><td>Auto</td><td>30d</td><td class="ss-missing">None</td><td>J. Rivera</td><td><span class="ss-status-urgent">URGENT - call Jeff</span></td></tr>
+        <tr><td>2</td><td>Vertex Cloud</td><td>SaaS</td><td>$480,000</td><td>Jul 2024</td><td style="color:#dc2626;font-weight:600;">Jul 5, 2026 ⚠️</td><td>Auto</td><td>20d</td><td>2 years</td><td>T. Chen</td><td><span class="ss-status-urgent">URGENT</span></td></tr>
+        <tr><td>3</td><td>Meridian Partners</td><td>MSA</td><td>$1,700,000</td><td>Jul 2023</td><td>Jul 18, 2026</td><td>Auto</td><td>30d</td><td class="ss-missing">None</td><td>J. Rivera</td><td><span class="ss-status-warn">Check with Sarah</span></td></tr>
+        <tr><td>4</td><td>Apex Data Services</td><td>Services</td><td>$690,000</td><td>Jul 2024</td><td>Jul 22, 2026</td><td>Auto</td><td>45d</td><td>1 year</td><td>M. Park</td><td><span class="ss-status-warn">Renewing?</span></td></tr>
+        <tr><td>5</td><td>Clearwater Tech</td><td>License</td><td>$295,000</td><td>Jul 2024</td><td>Jul 16, 2026</td><td>Auto</td><td>30d</td><td class="ss-missing">None</td><td>T. Chen</td><td><span class="ss-status-warn">Review needed</span></td></tr>
+        <tr><td>6</td><td>Blueshore Capital</td><td>SOW</td><td>$520,000</td><td>Jul 2024</td><td>Jul 23, 2026</td><td>Fixed</td><td>30d</td><td>2 years</td><td>J. Rivera</td><td><span class="ss-status-ok">Tracking</span></td></tr>
+        <tr><td>7</td><td>Pantera Inc</td><td>SaaS</td><td>$210,000</td><td>Jul 2024</td><td>Jul 25, 2026</td><td>Auto</td><td>15d</td><td>6 months</td><td>M. Park</td><td><span class="ss-status-manual">Unknown</span></td></tr>
+        <tr><td>8</td><td>Redstone Systems</td><td>License</td><td>$150,000</td><td>Jul 2023</td><td>Jul 9, 2026</td><td>None</td><td>45d</td><td>1 year</td><td class="ss-missing">—</td><td><span class="ss-status-manual">Lapsed?</span></td></tr>
+        <tr><td>9</td><td class="ss-missing">Unknown vendor</td><td class="ss-missing">—</td><td class="ss-missing">—</td><td class="ss-missing">—</td><td class="ss-missing">—</td><td class="ss-missing">—</td><td class="ss-missing">—</td><td class="ss-missing">—</td><td class="ss-missing">—</td><td><span class="ss-status-manual">Need to check</span></td></tr>
+        <tr><td>10</td><td class="ss-missing">See separate sheet</td><td class="ss-missing">—</td><td class="ss-missing">—</td><td class="ss-missing">—</td><td class="ss-missing">—</td><td class="ss-missing">—</td><td class="ss-missing">—</td><td class="ss-missing">—</td><td class="ss-missing">—</td><td><span class="ss-status-manual">...</span></td></tr>
+        <tr><td colspan="11" style="text-align:center;color:#aaa;font-style:italic;padding:12px;">... 37 more rows across 2 additional spreadsheets ...</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:16px;text-align:center;">
+      <button class="btn btn-primary" style="font-size:13px;padding:10px 24px;" onclick="toggleBeforeAfter()">See what DocuSign MCP makes possible →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ DASHBOARD VIEW ══ -->
+<div id="dashboard-view">
 
 <div class="controls-bar">
   <div class="range-tabs">
@@ -158,133 +346,99 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; f
   </div>
 </div>
 
-<div class="main-nav">
-  <div class="main-tab active" onclick="switchTab('overview',this)">Overview</div>
-  <div class="main-tab" onclick="switchTab('risk',this)">Risk &amp; Value</div>
-  <div class="main-tab" onclick="switchTab('obligations',this)">Obligations</div>
-  <div class="main-tab" onclick="switchTab('pipeline',this)">Renewal Pipeline</div>
-  <div class="main-tab" onclick="switchTab('audit',this)">Audit</div>
+<div class="main-nav" id="mainNav">
+  <div class="main-tab active" id="tab-overview" onclick="switchTab('overview',this)">Overview</div>
+  <div class="main-tab" id="tab-risk" onclick="switchTab('risk',this)">Risk &amp; Value</div>
+  <div class="main-tab" id="tab-obligations" onclick="switchTab('obligations',this)">Obligations</div>
+  <div class="main-tab" id="tab-pipeline" onclick="switchTab('pipeline',this)">Renewal Pipeline</div>
+  <div class="main-tab" id="tab-audit" onclick="switchTab('audit',this)">Audit</div>
 </div>
 
 <div class="main">
 
   <!-- OVERVIEW -->
   <div class="main-pane active" id="pane-overview">
+    <!-- AI Risk Summary -->
+    <div class="ai-summary-card">
+      <div class="ai-summary-icon">🤖</div>
+      <div style="flex:1">
+        <div class="ai-summary-label">AI Risk Summary — Jun 25, 2026</div>
+        <div class="ai-summary-text">3 contracts totaling <strong>$1.83M</strong> expire within 7 days without renewal confirmations — Orion Logistics MSA, Vertex Cloud SaaS, and Redstone Systems License. Additionally, <strong>$4.19M</strong> in auto-renewing contracts enter their notice window this week. Orion Logistics and Meridian Partners carry no liability caps, representing <strong>$2.9M</strong> in uncapped exposure. Immediate action recommended on Orion Logistics and Vertex Cloud.</div>
+        <div class="ai-summary-chips">
+          <span class="ai-chip" onclick="askQuery('Which contracts are expiring in the next 7 days?')">Expiring in 7 days</span>
+          <span class="ai-chip" onclick="askQuery('Which contracts are missing liability caps?')">Missing liability caps</span>
+          <span class="ai-chip" onclick="askQuery('What is our total unmanaged spend exposure?')">Unmanaged exposure</span>
+        </div>
+      </div>
+    </div>
     <div class="metrics">
-      <div class="metric-card"><div class="metric-label">Total agreements</div><div class="metric-value">47</div></div>
-      <div class="metric-card urgent"><div class="metric-label">Expiring in window</div><div class="metric-value">8</div><div class="metric-sub">Jun 25 – Jul 25, 2026</div></div>
-      <div class="metric-card warn"><div class="metric-label">Expiring this week</div><div class="metric-value">3</div></div>
-      <div class="metric-card"><div class="metric-label">Auto-renew upcoming</div><div class="metric-value">11</div><div class="metric-sub">next 90 days</div></div>
-      <div class="metric-card ok"><div class="metric-label">Avg contract value</div><div class="metric-value">$284K</div></div>
+      <div class="metric-card" id="mc-total"><div class="metric-label">Total agreements</div><div class="metric-value">47</div></div>
+      <div class="metric-card urgent" id="mc-expiring"><div class="metric-label">Expiring in window</div><div class="metric-value">8</div><div class="metric-sub">Jun 25 – Jul 25, 2026</div></div>
+      <div class="metric-card warn" id="mc-week"><div class="metric-label">Expiring this week</div><div class="metric-value">3</div></div>
+      <div class="metric-card" id="mc-autorenew"><div class="metric-label">Auto-renew upcoming</div><div class="metric-value">11</div><div class="metric-sub">next 90 days</div></div>
+      <div class="metric-card ok" id="mc-avg"><div class="metric-label">Avg contract value</div><div class="metric-value">$284K</div></div>
+      <div class="metric-card urgent" id="mc-exposure"><div class="metric-label">Unmanaged exposure</div><div class="metric-value">$3.2M</div><div class="metric-sub">no liability cap</div></div>
     </div>
     <div class="charts-grid">
-      <div class="chart-card"><div class="chart-title">Contracts by renewal type<i class="info-icon">i<span class="info-tip">Breaks down your portfolio by how each contract renews — auto-renew, fixed term, evergreen, or no renewal clause. Helps identify exposure to unmanaged auto-renewals.</span></i></div><div class="chart-wrap"><canvas id="renewalChart"></canvas></div></div>
-      <div class="chart-card"><div class="chart-title">Expiring by month<i class="info-icon">i<span class="info-tip">Shows how many contracts expire each month over the next four months. Use this to prioritize renewal outreach and avoid missed deadlines.</span></i></div><div class="chart-wrap"><canvas id="timelineChart"></canvas></div></div>
-      <div class="chart-card"><div class="chart-title">Top counterparties (expiring)<i class="info-icon">i<span class="info-tip">Ranks counterparties by number of contracts expiring soon. Counterparties with multiple expiring agreements may warrant a consolidated renegotiation.</span></i></div><div class="chart-wrap"><canvas id="partyChart"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Contracts by renewal type<i class="info-icon">i<span class="info-tip">Breaks down your portfolio by how each contract renews — auto-renew, fixed term, evergreen, or no renewal clause.</span></i></div><div class="chart-wrap"><canvas id="renewalChart"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Expiring by month<i class="info-icon">i<span class="info-tip">Shows how many contracts expire each month. Use this to prioritize renewal outreach and avoid missed deadlines.</span></i></div><div class="chart-wrap"><canvas id="timelineChart"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Top counterparties (expiring)<i class="info-icon">i<span class="info-tip">Ranks counterparties by number of contracts expiring soon. Multiple expiring agreements may warrant a consolidated renegotiation.</span></i></div><div class="chart-wrap"><canvas id="partyChart"></canvas></div></div>
     </div>
     <div class="section">
-      <div class="section-header"><div class="section-title">Suggested action items <span class="badge badge-blue">6 items</span> <span style="font-size:11px;font-weight:400;color:#aaa;">0 of 6 done</span></div></div>
-      <div class="action-item">
-        <input type="checkbox" class="action-check">
-        <div class="action-priority urgent"></div>
-        <div class="action-content">
-          <div class="action-title">Master Services Agreement with Orion Logistics expires Jul 2</div>
-          <div class="action-desc">Immediate action required — expires within 7 days. Confirm renewal intent or begin renegotiation.</div>
-          <div class="action-meta"><span>Value: $1,200,000</span><button class="btn-view" onclick="openModal('orion')">View agreement</button></div>
-        </div>
-      </div>
-      <div class="action-item">
-        <input type="checkbox" class="action-check">
-        <div class="action-priority urgent"></div>
-        <div class="action-content">
-          <div class="action-title">SaaS Subscription with Vertex Cloud expires Jul 5</div>
-          <div class="action-desc">Immediate action required — expires within 7 days. Confirm renewal intent or begin renegotiation.</div>
-          <div class="action-meta"><span>Value: $480,000</span><button class="btn-view" onclick="openModal('vertex')">View agreement</button></div>
-        </div>
-      </div>
-      <div class="action-item">
-        <input type="checkbox" class="action-check">
-        <div class="action-priority warn"></div>
-        <div class="action-content">
-          <div class="action-title">Auto-renewal notice window closing — Meridian Partners</div>
-          <div class="action-desc">This contract auto-renews with a 30d notice period. Act now to prevent unwanted renewal on Jul 18.</div>
-          <div class="action-meta"><button class="btn-view" onclick="openModal('meridian')">View agreement</button></div>
-        </div>
-      </div>
-      <div class="action-item">
-        <input type="checkbox" class="action-check">
-        <div class="action-priority warn"></div>
-        <div class="action-content">
-          <div class="action-title">Auto-renewal notice window closing — Apex Data Services</div>
-          <div class="action-desc">This contract auto-renews with a 45d notice period. Act now to prevent unwanted renewal on Jul 22.</div>
-          <div class="action-meta"><button class="btn-view" onclick="openModal('apex')">View agreement</button></div>
-        </div>
-      </div>
-      <div class="action-item">
-        <input type="checkbox" class="action-check">
-        <div class="action-priority info"></div>
-        <div class="action-content">
-          <div class="action-title">Review auto-renew terms — Clearwater Tech (21d)</div>
-          <div class="action-desc">Confirm pricing and scope before auto-renewal on Jul 16.</div>
-          <div class="action-meta"><span>Value: $295,000</span><button class="btn-view" onclick="openModal('clearwater')">View agreement</button></div>
-        </div>
-      </div>
-      <div class="action-item">
-        <input type="checkbox" class="action-check">
-        <div class="action-priority info"></div>
-        <div class="action-content">
-          <div class="action-title">4 agreements missing expiration dates</div>
-          <div class="action-desc">These won't appear in expiry reports until updated in Navigator.</div>
-          <div class="action-meta"><span>NDA — Blueshore Capital, SaaS License — Pantera Inc, and 2 others</span></div>
-        </div>
-      </div>
+      <div class="section-header"><div class="section-title">Suggested action items <span class="badge badge-blue">6 items</span></div></div>
+      <div class="action-item"><input type="checkbox" class="action-check"><div class="action-priority urgent"></div><div class="action-content"><div class="action-title">Master Services Agreement with Orion Logistics expires Jul 2</div><div class="action-desc">Immediate action required — expires within 7 days. Confirm renewal intent or begin renegotiation.</div><div class="action-meta"><span>Value: $1,200,000</span><button class="btn-view" onclick="openModal('orion')">View &amp; Act</button></div></div></div>
+      <div class="action-item"><input type="checkbox" class="action-check"><div class="action-priority urgent"></div><div class="action-content"><div class="action-title">SaaS Subscription with Vertex Cloud expires Jul 5</div><div class="action-desc">Immediate action required — expires within 7 days.</div><div class="action-meta"><span>Value: $480,000</span><button class="btn-view" onclick="openModal('vertex')">View &amp; Act</button></div></div></div>
+      <div class="action-item"><input type="checkbox" class="action-check"><div class="action-priority warn"></div><div class="action-content"><div class="action-title">Auto-renewal notice window closing — Meridian Partners</div><div class="action-desc">Auto-renews with 30d notice. Act now to prevent unwanted renewal on Jul 18.</div><div class="action-meta"><button class="btn-view" onclick="openModal('meridian')">View &amp; Act</button></div></div></div>
+      <div class="action-item"><input type="checkbox" class="action-check"><div class="action-priority warn"></div><div class="action-content"><div class="action-title">Auto-renewal notice window closing — Apex Data Services</div><div class="action-desc">Auto-renews with 45d notice. Act now to prevent unwanted renewal.</div><div class="action-meta"><button class="btn-view" onclick="openModal('apex')">View &amp; Act</button></div></div></div>
+      <div class="action-item"><input type="checkbox" class="action-check"><div class="action-priority info"></div><div class="action-content"><div class="action-title">Review auto-renew terms — Clearwater Tech</div><div class="action-desc">Confirm pricing and scope before auto-renewal on Jul 16. No liability cap on file.</div><div class="action-meta"><span>Value: $295,000</span><button class="btn-view" onclick="openModal('clearwater')">View &amp; Act</button></div></div></div>
+      <div class="action-item"><input type="checkbox" class="action-check"><div class="action-priority info"></div><div class="action-content"><div class="action-title">4 agreements missing expiration dates</div><div class="action-desc">These won't appear in expiry reports until updated in Navigator.</div><div class="action-meta"><span>NDA — Blueshore Capital, SaaS License — Pantera Inc, and 2 others</span></div></div></div>
     </div>
   </div>
 
   <!-- RISK & VALUE -->
   <div class="main-pane" id="pane-risk">
     <div class="metrics">
-      <div class="metric-card urgent"><div class="metric-label">Value at risk (window)</div><div class="metric-value">$3.2M</div><div class="metric-sub">expiring agreements</div></div>
-      <div class="metric-card warn"><div class="metric-label">Auto-renew value</div><div class="metric-value">$4.8M</div><div class="metric-sub">next 90 days</div></div>
-      <div class="metric-card info"><div class="metric-label">Total portfolio value</div><div class="metric-value">$13.4M</div></div>
-      <div class="metric-card"><div class="metric-label">Highest single exposure</div><div class="metric-value">$2.1M</div><div class="metric-sub">Orion Logistics</div></div>
-      <div class="metric-card"><div class="metric-label">Added last 7 days</div><div class="metric-value">3</div><div class="metric-sub">new agreements</div></div>
+      <div class="metric-card urgent" id="mc-risk-exposure"><div class="metric-label">Value at risk (window)</div><div class="metric-value">$3.2M</div><div class="metric-sub">expiring agreements</div></div>
+      <div class="metric-card warn" id="mc-risk-autorenew"><div class="metric-label">Auto-renew value</div><div class="metric-value">$4.8M</div><div class="metric-sub">next 90 days</div></div>
+      <div class="metric-card info" id="mc-risk-total"><div class="metric-label">Total portfolio value</div><div class="metric-value">$13.4M</div></div>
+      <div class="metric-card" id="mc-risk-single"><div class="metric-label">Highest single exposure</div><div class="metric-value">$2.1M</div><div class="metric-sub">Orion Logistics</div></div>
+      <div class="metric-card urgent" id="mc-risk-nocap"><div class="metric-label">Uncapped liability</div><div class="metric-value">$3.2M</div><div class="metric-sub">3 contracts, no cap</div></div>
     </div>
+
+    <!-- Dollar value at risk breakdown -->
+    <div class="section" style="margin-bottom:14px;">
+      <div class="section-header"><div class="section-title">Dollar value at risk — breakdown</div><span class="badge badge-red">$6.1M total exposure</span></div>
+      <p style="font-size:11px;color:#888;margin-bottom:14px;">Contracts with missing, non-standard, or expiring terms, grouped by risk type.</p>
+      <div class="risk-bar">
+        <div class="risk-bar-row"><div class="risk-bar-label">Expiring without renewal confirmed</div><div class="risk-bar-track"><div class="risk-bar-fill" style="width:100%;background:#dc2626;"></div></div><div class="risk-bar-val" style="color:#dc2626;">$1.83M</div></div>
+        <div class="risk-bar-row"><div class="risk-bar-label">Auto-renewing in notice window</div><div class="risk-bar-track"><div class="risk-bar-fill" style="width:70%;background:#d97706;"></div></div><div class="risk-bar-val" style="color:#d97706;">$2.19M</div></div>
+        <div class="risk-bar-row"><div class="risk-bar-label">No liability cap</div><div class="risk-bar-track"><div class="risk-bar-fill" style="width:52%;background:#dc2626;"></div></div><div class="risk-bar-val" style="color:#dc2626;">$3.20M</div></div>
+        <div class="risk-bar-row"><div class="risk-bar-label">Non-standard payment terms</div><div class="risk-bar-track"><div class="risk-bar-fill" style="width:36%;background:#d97706;"></div></div><div class="risk-bar-val" style="color:#d97706;">$2.90M</div></div>
+        <div class="risk-bar-row"><div class="risk-bar-label">Missing DPA (data risk)</div><div class="risk-bar-track"><div class="risk-bar-fill" style="width:60%;background:#7c3aed;"></div></div><div class="risk-bar-val" style="color:#7c3aed;">$4.10M</div></div>
+        <div class="risk-bar-row"><div class="risk-bar-label">Missing expiration date</div><div class="risk-bar-track"><div class="risk-bar-fill" style="width:24%;background:#6b7280;"></div></div><div class="risk-bar-val" style="color:#6b7280;">unknown</div></div>
+      </div>
+    </div>
+
     <div class="charts-grid-2">
-      <div class="chart-card"><div class="chart-title">Spend by agreement type<i class="info-icon">i<span class="info-tip">Total contracted value grouped by agreement category (MSA, SaaS, services, etc.). Highlights which agreement types carry the most financial weight in your portfolio.</span></i></div><div class="chart-sub">Total contract value</div><div class="chart-wrap"><canvas id="spendChart"></canvas></div></div>
-      <div class="chart-card"><div class="chart-title">Portfolio value over time<i class="info-icon">i<span class="info-tip">Cumulative contract value plotted by each agreement's effective (start) date. Rising trends indicate accelerating spend commitments; flat periods suggest slower contracting activity.</span></i></div><div class="chart-sub">By agreement effective date</div><div class="chart-wrap"><canvas id="valueChart"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Spend by agreement type<i class="info-icon">i<span class="info-tip">Total contracted value grouped by agreement category. Highlights which types carry the most financial weight.</span></i></div><div class="chart-sub">Total contract value</div><div class="chart-wrap"><canvas id="spendChart"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Portfolio value over time<i class="info-icon">i<span class="info-tip">Cumulative contract value by agreement effective date. Rising trends indicate accelerating spend commitments.</span></i></div><div class="chart-sub">By agreement effective date</div><div class="chart-wrap"><canvas id="valueChart"></canvas></div></div>
     </div>
     <div class="chart-card" style="margin-bottom:14px;">
       <div style="margin-bottom:10px;">
-        <div class="chart-title" style="margin-bottom:2px;">Renewal value forecast — next 12 months<i class="info-icon">i<span class="info-tip">Projects portfolio value over 12 months based on how expiring contracts renew. Adjust the percentages to model scenarios: 100% = flat (all renew at same value), 120% = 20% net growth, 70% = 30% of expiring value is lost.</span></i></div>
-        <div style="font-size:11px;color:#888;">Each scenario represents the % of expiring contract value retained or replaced. Values above 100% indicate net growth.</div>
+        <div class="chart-title" style="margin-bottom:2px;">Renewal value forecast — next 12 months<i class="info-icon">i<span class="info-tip">Projects portfolio value over 12 months. 100% = flat, 120% = 20% net growth, 70% = 30% of expiring value lost.</span></i></div>
+        <div style="font-size:11px;color:#888;">Adjust scenarios below to model your renewal outcomes.</div>
       </div>
       <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;">
-        <div style="display:flex;align-items:center;gap:7px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:7px 12px;">
-          <span style="width:12px;height:12px;border-radius:50%;background:#16a34a;flex-shrink:0;"></span>
-          <label style="font-size:11px;font-weight:600;color:#15803d;white-space:nowrap;">Best case</label>
-          <input type="number" id="fc-best" value="120" min="0" step="5" style="width:60px;padding:3px 6px;border-radius:5px;border:1px solid #86efac;font-size:12px;font-weight:600;color:#15803d;background:#fff;text-align:center;" oninput="updateForecast()">
-          <span style="font-size:11px;color:#15803d;">%</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:7px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:7px 12px;">
-          <span style="width:12px;height:12px;border-radius:50%;background:#2563eb;flex-shrink:0;"></span>
-          <label style="font-size:11px;font-weight:600;color:#1d4ed8;white-space:nowrap;">Expected</label>
-          <input type="number" id="fc-expected" value="70" min="0" step="5" style="width:60px;padding:3px 6px;border-radius:5px;border:1px solid #93c5fd;font-size:12px;font-weight:600;color:#1d4ed8;background:#fff;text-align:center;" oninput="updateForecast()">
-          <span style="font-size:11px;color:#1d4ed8;">%</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:7px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:7px 12px;">
-          <span style="width:12px;height:12px;border-radius:50%;background:#dc2626;flex-shrink:0;"></span>
-          <label style="font-size:11px;font-weight:600;color:#b91c1c;white-space:nowrap;">Worst case</label>
-          <input type="number" id="fc-worst" value="0" min="0" step="5" style="width:60px;padding:3px 6px;border-radius:5px;border:1px solid #fca5a5;font-size:12px;font-weight:600;color:#b91c1c;background:#fff;text-align:center;" oninput="updateForecast()">
-          <span style="font-size:11px;color:#b91c1c;">%</span>
-        </div>
-        <div style="display:flex;align-items:center;padding:7px 12px;font-size:10px;color:#aaa;max-width:200px;line-height:1.4;">100% = all renew, flat · 120% = 20% net growth · 70% = 30% lost on expiry</div>
+        <div style="display:flex;align-items:center;gap:7px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:7px 12px;"><span style="width:12px;height:12px;border-radius:50%;background:#16a34a;flex-shrink:0;"></span><label style="font-size:11px;font-weight:600;color:#15803d;white-space:nowrap;">Best case</label><input type="number" id="fc-best" value="120" min="0" step="5" style="width:60px;padding:3px 6px;border-radius:5px;border:1px solid #86efac;font-size:12px;font-weight:600;color:#15803d;background:#fff;text-align:center;" oninput="updateForecast()"><span style="font-size:11px;color:#15803d;">%</span></div>
+        <div style="display:flex;align-items:center;gap:7px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:7px 12px;"><span style="width:12px;height:12px;border-radius:50%;background:#2563eb;flex-shrink:0;"></span><label style="font-size:11px;font-weight:600;color:#1d4ed8;white-space:nowrap;">Expected</label><input type="number" id="fc-expected" value="70" min="0" step="5" style="width:60px;padding:3px 6px;border-radius:5px;border:1px solid #93c5fd;font-size:12px;font-weight:600;color:#1d4ed8;background:#fff;text-align:center;" oninput="updateForecast()"><span style="font-size:11px;color:#1d4ed8;">%</span></div>
+        <div style="display:flex;align-items:center;gap:7px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:7px 12px;"><span style="width:12px;height:12px;border-radius:50%;background:#dc2626;flex-shrink:0;"></span><label style="font-size:11px;font-weight:600;color:#b91c1c;white-space:nowrap;">Worst case</label><input type="number" id="fc-worst" value="0" min="0" step="5" style="width:60px;padding:3px 6px;border-radius:5px;border:1px solid #fca5a5;font-size:12px;font-weight:600;color:#b91c1c;background:#fff;text-align:center;" oninput="updateForecast()"><span style="font-size:11px;color:#b91c1c;">%</span></div>
+        <div style="display:flex;align-items:center;padding:7px 12px;font-size:10px;color:#aaa;max-width:200px;line-height:1.4;">100% = all renew flat · 120% = 20% growth · 70% = 30% lost</div>
       </div>
-      <div class="chart-wrap" style="height:240px;width:100%;overflow:hidden;"><canvas id="forecastChart"></canvas></div>
+      <div class="chart-wrap" style="height:240px;"><canvas id="forecastChart"></canvas></div>
     </div>
     <div class="section">
       <div class="section-header"><div class="section-title">Counterparty concentration</div></div>
-      <p style="font-size:11px;color:#888;margin-bottom:12px;">% of total portfolio value tied to each party. Parties above 20% represent concentration risk.</p>
+      <p style="font-size:11px;color:#888;margin-bottom:12px;">% of total portfolio value per counterparty. Parties above 20% represent concentration risk.</p>
       <div class="conc-bar-row"><div class="conc-bar-label">Orion Logistics</div><div class="conc-bar-track"><div class="conc-bar-fill high" style="width:100%"></div></div><div class="conc-bar-val">$2.1M <span class="badge badge-red">16%</span></div></div>
       <div class="conc-bar-row"><div class="conc-bar-label">Meridian Partners</div><div class="conc-bar-track"><div class="conc-bar-fill medium" style="width:82%"></div></div><div class="conc-bar-val">$1.7M <span class="badge badge-yellow">13%</span></div></div>
       <div class="conc-bar-row"><div class="conc-bar-label">Vertex Cloud</div><div class="conc-bar-track"><div class="conc-bar-fill" style="width:57%"></div></div><div class="conc-bar-val">$1.2M <span class="badge badge-gray">9%</span></div></div>
@@ -306,42 +460,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; f
       <p style="font-size:11px;color:#888;margin-bottom:12px;">Dates by which you must act to avoid unwanted auto-renewal.</p>
       <div class="ob-filter-bar">
         <input type="text" placeholder="Search counterparty, title, or type…" oninput="filterObTable(this.value)">
-        <select onchange="filterObStatus(this.value)">
-          <option value="all">All statuses</option>
-          <option value="urgent">Urgent</option>
-          <option value="upcoming">Upcoming</option>
-          <option value="window_open">Window open</option>
-        </select>
-        <select onchange="filterObType(this.value)">
-          <option value="all">All types</option>
-          <option value="MSA">MSA</option>
-          <option value="SaaS">SaaS Subscription</option>
-          <option value="NDA">NDA</option>
-          <option value="SOW">SOW</option>
-        </select>
-        <select onchange="filterObCp(this.value)">
-          <option value="all">All counterparties</option>
-          <option>Orion Logistics</option>
-          <option>Meridian Partners</option>
-          <option>Vertex Cloud</option>
-          <option>Clearwater Tech</option>
-          <option>Apex Data Services</option>
-          <option>Blueshore Capital</option>
-          <option>Pantera Inc</option>
-        </select>
+        <select onchange="filterObStatus(this.value)"><option value="all">All statuses</option><option value="urgent">Urgent</option><option value="upcoming">Upcoming</option><option value="window_open">Window open</option></select>
+        <select onchange="filterObType(this.value)"><option value="all">All types</option><option value="MSA">MSA</option><option value="SaaS Subscription">SaaS</option><option value="SOW">SOW</option><option value="License">License</option><option value="Services">Services</option></select>
+        <select onchange="filterObCp(this.value)"><option value="all">All counterparties</option><option>Orion Logistics</option><option>Meridian Partners</option><option>Vertex Cloud</option><option>Clearwater Tech</option><option>Apex Data Services</option><option>Blueshore Capital</option><option>Pantera Inc</option><option>Redstone Systems</option></select>
       </div>
       <table class="ob-table" id="obTable">
-        <thead><tr>
-          <th>Counterparty</th>
-          <th>Type</th>
-          <th>Notice deadline</th>
-          <th>Expiry date</th>
-          <th>Days left</th>
-          <th>Notice period</th>
-          <th>Value</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr></thead>
+        <thead><tr><th>Counterparty</th><th>Type</th><th>Notice deadline</th><th>Expiry</th><th>Days left</th><th>Notice period</th><th>Value</th><th>Status</th><th>Actions</th></tr></thead>
         <tbody id="obBody"></tbody>
       </table>
       <div class="ob-pager"><span id="obCount"></span></div>
@@ -350,59 +474,27 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; f
 
   <!-- PIPELINE -->
   <div class="main-pane" id="pane-pipeline">
-    <p style="font-size:11px;color:#888;margin-bottom:14px;">Move agreements through your renewal decision workflow by clicking the column buttons below each card.</p>
+    <p style="font-size:11px;color:#888;margin-bottom:14px;">Move agreements through your renewal decision workflow.</p>
     <div class="kanban-board">
       <div class="kanban-col">
         <div class="kanban-col-header">Needs decision <span class="kanban-col-count">4</span></div>
-        <div class="kanban-card kanban-urgent">
-          <div class="kanban-card-title">Master Services Agreement</div>
-          <div class="kanban-card-meta">Orion Logistics</div>
-          <div class="kanban-card-chips"><span class="chip">7d</span><span class="chip">MSA</span></div>
-        </div>
-        <div class="kanban-card kanban-urgent">
-          <div class="kanban-card-title">SaaS Subscription</div>
-          <div class="kanban-card-meta">Vertex Cloud</div>
-          <div class="kanban-card-chips"><span class="chip">10d</span><span class="chip">SaaS</span></div>
-        </div>
-        <div class="kanban-card kanban-warn">
-          <div class="kanban-card-title">Professional Services Agreement</div>
-          <div class="kanban-card-meta">Blueshore Capital</div>
-          <div class="kanban-card-chips"><span class="chip">23d</span><span class="chip">SOW</span></div>
-        </div>
-        <div class="kanban-card kanban-warn">
-          <div class="kanban-card-title">Data Processing Agreement</div>
-          <div class="kanban-card-meta">Pantera Inc</div>
-          <div class="kanban-card-chips"><span class="chip">29d</span><span class="chip">DPA</span></div>
-        </div>
+        <div class="kanban-card kanban-urgent"><div class="kanban-card-title">Master Services Agreement</div><div class="kanban-card-meta">Orion Logistics</div><div class="kanban-card-chips"><span class="chip">7d</span><span class="chip">MSA</span><span class="chip">$1.2M</span></div><div style="margin-top:8px;"><button class="btn-view" onclick="openModal('orion')">View &amp; Act</button></div></div>
+        <div class="kanban-card kanban-urgent"><div class="kanban-card-title">SaaS Subscription</div><div class="kanban-card-meta">Vertex Cloud</div><div class="kanban-card-chips"><span class="chip">10d</span><span class="chip">SaaS</span></div><div style="margin-top:8px;"><button class="btn-view" onclick="openModal('vertex')">View &amp; Act</button></div></div>
+        <div class="kanban-card kanban-warn"><div class="kanban-card-title">Professional Services</div><div class="kanban-card-meta">Blueshore Capital</div><div class="kanban-card-chips"><span class="chip">23d</span><span class="chip">SOW</span></div></div>
+        <div class="kanban-card kanban-warn"><div class="kanban-card-title">Data Processing Agreement</div><div class="kanban-card-meta">Pantera Inc</div><div class="kanban-card-chips"><span class="chip">29d</span><span class="chip">DPA</span></div></div>
       </div>
       <div class="kanban-col">
         <div class="kanban-col-header">In negotiation <span class="kanban-col-count">2</span></div>
-        <div class="kanban-card kanban-warn">
-          <div class="kanban-card-title">Enterprise License Agreement</div>
-          <div class="kanban-card-meta">Clearwater Tech</div>
-          <div class="kanban-card-chips"><span class="chip">21d</span><span class="chip">License</span></div>
-        </div>
-        <div class="kanban-card">
-          <div class="kanban-card-title">Support Services Agreement</div>
-          <div class="kanban-card-meta">Apex Data Services</div>
-          <div class="kanban-card-chips"><span class="chip">35d</span><span class="chip">Services</span></div>
-        </div>
+        <div class="kanban-card kanban-warn"><div class="kanban-card-title">Enterprise License Agreement</div><div class="kanban-card-meta">Clearwater Tech</div><div class="kanban-card-chips"><span class="chip">21d</span><span class="chip">License</span></div></div>
+        <div class="kanban-card"><div class="kanban-card-title">Support Services Agreement</div><div class="kanban-card-meta">Apex Data Services</div><div class="kanban-card-chips"><span class="chip">35d</span><span class="chip">Services</span></div></div>
       </div>
       <div class="kanban-col">
         <div class="kanban-col-header">Approved to renew <span class="kanban-col-count">1</span></div>
-        <div class="kanban-card">
-          <div class="kanban-card-title">Master Services Agreement</div>
-          <div class="kanban-card-meta">Meridian Partners</div>
-          <div class="kanban-card-chips"><span class="chip">18d</span><span class="chip">MSA</span></div>
-        </div>
+        <div class="kanban-card"><div class="kanban-card-title">Master Services Agreement</div><div class="kanban-card-meta">Meridian Partners</div><div class="kanban-card-chips"><span class="chip">18d</span><span class="chip">MSA</span><span class="chip">$1.7M</span></div><div style="margin-top:8px;"><button class="btn-view" onclick="openModal('meridian')">Send for Signature</button></div></div>
       </div>
       <div class="kanban-col">
         <div class="kanban-col-header">Flagged for exit <span class="kanban-col-count">1</span></div>
-        <div class="kanban-card" style="border-left:3px solid #dc2626;">
-          <div class="kanban-card-title">Software License</div>
-          <div class="kanban-card-meta">Redstone Systems</div>
-          <div class="kanban-card-chips"><span class="chip">14d</span><span class="chip">License</span></div>
-        </div>
+        <div class="kanban-card" style="border-left:3px solid #dc2626;"><div class="kanban-card-title">Software License</div><div class="kanban-card-meta">Redstone Systems</div><div class="kanban-card-chips"><span class="chip">14d</span><span class="chip">License</span></div></div>
       </div>
     </div>
   </div>
@@ -427,25 +519,85 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; f
         <div class="velocity-row"><div class="velocity-type">MSA</div><div class="velocity-bar-track"><div class="velocity-bar-fill" style="width:100%"></div></div><div class="velocity-avg" style="font-size:12px;min-width:55px;text-align:right;">15d avg</div></div>
       </div>
     </div>
+
+    <!-- Compliance Gap Tracker -->
+    <div class="section" style="margin-top:14px;">
+      <div class="section-header">
+        <div class="section-title">Compliance gap tracker <span class="badge badge-purple">AI-extracted</span></div>
+        <span style="font-size:11px;color:#888;">Standard clauses by contract · <span style="color:#dc2626;">✗ = missing</span> · <span style="color:#16a34a;">✓ = present</span></span>
+      </div>
+      <p style="font-size:11px;color:#888;margin-bottom:14px;">DocuSign AI analyzed each agreement for the presence of five standard protective clauses. Missing clauses represent potential legal and compliance exposure.</p>
+      <div style="overflow-x:auto;">
+        <table class="gap-table">
+          <thead><tr>
+            <th class="left" style="min-width:180px;">Agreement</th>
+            <th>Governing Law</th>
+            <th>Liability Cap</th>
+            <th>Data Processing<br>Addendum</th>
+            <th>Force Majeure</th>
+            <th>Data Security<br>Standards</th>
+            <th>Gap Score</th>
+          </tr></thead>
+          <tbody>
+            <tr><td class="left"><div style="font-weight:500;">Orion Logistics</div><div style="font-size:10px;color:#888;">MSA · $1.2M</div></td><td><span class="gap-ok">✓</span></td><td><span class="gap-miss">✗</span></td><td><span class="gap-miss">✗</span></td><td><span class="gap-ok">✓</span></td><td><span class="gap-miss">✗</span></td><td><span class="badge badge-red">3 missing</span></td></tr>
+            <tr><td class="left"><div style="font-weight:500;">Meridian Partners</div><div style="font-size:10px;color:#888;">MSA · $1.7M</div></td><td><span class="gap-ok">✓</span></td><td><span class="gap-miss">✗</span></td><td><span class="gap-miss">✗</span></td><td><span class="gap-ok">✓</span></td><td><span class="gap-miss">✗</span></td><td><span class="badge badge-red">3 missing</span></td></tr>
+            <tr><td class="left"><div style="font-weight:500;">Vertex Cloud</div><div style="font-size:10px;color:#888;">SaaS · $480K</div></td><td><span class="gap-ok">✓</span></td><td><span class="gap-ok">✓</span></td><td><span class="gap-ok">✓</span></td><td><span class="gap-miss">✗</span></td><td><span class="gap-ok">✓</span></td><td><span class="badge badge-yellow">1 missing</span></td></tr>
+            <tr><td class="left"><div style="font-weight:500;">Apex Data Services</div><div style="font-size:10px;color:#888;">Services · $690K</div></td><td><span class="gap-ok">✓</span></td><td><span class="gap-ok">✓</span></td><td><span class="gap-miss">✗</span></td><td><span class="gap-miss">✗</span></td><td><span class="gap-miss">✗</span></td><td><span class="badge badge-red">3 missing</span></td></tr>
+            <tr><td class="left"><div style="font-weight:500;">Clearwater Tech</div><div style="font-size:10px;color:#888;">License · $295K</div></td><td><span class="gap-ok">✓</span></td><td><span class="gap-miss">✗</span></td><td><span class="gap-miss">✗</span></td><td><span class="gap-ok">✓</span></td><td><span class="gap-miss">✗</span></td><td><span class="badge badge-red">3 missing</span></td></tr>
+            <tr><td class="left"><div style="font-weight:500;">Blueshore Capital</div><div style="font-size:10px;color:#888;">SOW · $520K</div></td><td><span class="gap-ok">✓</span></td><td><span class="gap-ok">✓</span></td><td><span class="gap-miss">✗</span></td><td><span class="gap-ok">✓</span></td><td><span class="gap-ok">✓</span></td><td><span class="badge badge-yellow">1 missing</span></td></tr>
+            <tr><td class="left"><div style="font-weight:500;">Pantera Inc</div><div style="font-size:10px;color:#888;">SaaS · $210K</div></td><td><span class="gap-miss">✗</span></td><td><span class="gap-ok">✓</span></td><td><span class="gap-ok">✓</span></td><td><span class="gap-miss">✗</span></td><td><span class="gap-ok">✓</span></td><td><span class="badge badge-yellow">2 missing</span></td></tr>
+            <tr><td class="left"><div style="font-weight:500;">Redstone Systems</div><div style="font-size:10px;color:#888;">License · $150K</div></td><td><span class="gap-ok">✓</span></td><td><span class="gap-ok">✓</span></td><td><span class="gap-miss">✗</span></td><td><span class="gap-miss">✗</span></td><td><span class="gap-miss">✗</span></td><td><span class="badge badge-red">3 missing</span></td></tr>
+            <tr class="gap-summary"><td class="left" style="font-size:11px;">Portfolio totals</td><td style="font-size:11px;">7/8 ✓</td><td style="font-size:11px;">5/8 ✓</td><td style="font-size:11px;">3/8 ✓</td><td style="font-size:11px;">5/8 ✓</td><td style="font-size:11px;">4/8 ✓</td><td><span class="badge badge-red">19 gaps</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:12px;padding:10px 12px;background:#fef2f2;border:1px solid #fecaca;border-radius:7px;font-size:12px;color:#991b1b;">
+        <strong>Highest risk:</strong> Orion Logistics ($1.2M), Meridian Partners ($1.7M), and Apex Data Services ($690K) each have 3+ missing protective clauses. Recommend immediate remediation before renewal.
+      </div>
+    </div>
+
     <div class="section" style="margin-top:14px">
       <div class="section-header"><div class="section-title">Non-standard terms by agreement type</div></div>
       <p style="font-size:11px;color:#888;margin-bottom:12px;">Flags agreements with payment terms beyond Net 30, missing liability caps, or notice periods under 30 days.</p>
       <div style="margin-bottom:12px;">
         <div style="font-size:12px;font-weight:600;color:#333;margin-bottom:6px;">MSA <span class="badge badge-red">3</span></div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f5f5f3;gap:8px;"><div style="flex:1;font-size:12px;">Master Services Agreement — Orion Logistics</div><div style="font-size:11px;color:#dc2626;">Net 60 (non-standard) · No liability cap</div></div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f5f5f3;gap:8px;"><div style="flex:1;font-size:12px;">Master Services Agreement — Meridian Partners</div><div style="font-size:11px;color:#dc2626;">Net 60 (non-standard)</div></div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;gap:8px;"><div style="flex:1;font-size:12px;">Master Services Agreement — Clearwater Tech</div><div style="font-size:11px;color:#dc2626;">No liability cap</div></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f5f5f3;gap:8px;"><div style="flex:1;font-size:12px;">Master Services Agreement — Orion Logistics</div><div style="font-size:11px;color:#dc2626;">Net 60 · No liability cap</div><button class="btn-view" onclick="openModal('orion')">View &amp; Act</button></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f5f5f3;gap:8px;"><div style="flex:1;font-size:12px;">Master Services Agreement — Meridian Partners</div><div style="font-size:11px;color:#dc2626;">Net 60 · No liability cap</div><button class="btn-view" onclick="openModal('meridian')">View &amp; Act</button></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;gap:8px;"><div style="flex:1;font-size:12px;">Master Services Agreement — Clearwater Tech</div><div style="font-size:11px;color:#dc2626;">No liability cap</div><button class="btn-view" onclick="openModal('clearwater')">View &amp; Act</button></div>
       </div>
       <div>
         <div style="font-size:12px;font-weight:600;color:#333;margin-bottom:6px;">SaaS Subscription <span class="badge badge-red">2</span></div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f5f5f3;gap:8px;"><div style="flex:1;font-size:12px;">SaaS Subscription — Vertex Cloud</div><div style="font-size:11px;color:#dc2626;">20d notice (< 30d)</div></div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;gap:8px;"><div style="flex:1;font-size:12px;">SaaS License — Pantera Inc</div><div style="font-size:11px;color:#dc2626;">Net 90 (non-standard) · 15d notice (< 30d)</div></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f5f5f3;gap:8px;"><div style="flex:1;font-size:12px;">SaaS Subscription — Vertex Cloud</div><div style="font-size:11px;color:#dc2626;">20d notice (&lt; 30d)</div><button class="btn-view" onclick="openModal('vertex')">View &amp; Act</button></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0;gap:8px;"><div style="flex:1;font-size:12px;">SaaS License — Pantera Inc</div><div style="font-size:11px;color:#dc2626;">Net 90 · 15d notice</div><button class="btn-view" onclick="openModal('pantera')">View &amp; Act</button></div>
       </div>
     </div>
   </div>
+
+</div><!-- /.main -->
+</div><!-- /#dashboard-view -->
+
+<!-- ══ NL QUERY FLOATING PANEL ══ -->
+<button class="nl-fab" onclick="toggleNL()">🤖 Ask your contracts</button>
+<div class="nl-panel" id="nlPanel">
+  <div class="nl-panel-header">
+    <div class="nl-panel-title">🤖 Ask your contracts</div>
+    <button class="nl-close" onclick="toggleNL()">✕</button>
+  </div>
+  <div class="nl-chips">
+    <span class="nl-chip" onclick="askQuery('Which contracts auto-renew in the next 60 days?')">Auto-renewing soon</span>
+    <span class="nl-chip" onclick="askQuery('What is our total unmanaged spend exposure?')">Unmanaged exposure</span>
+    <span class="nl-chip" onclick="askQuery('Which contracts are missing liability caps?')">Missing liability caps</span>
+    <span class="nl-chip" onclick="askQuery('Who are our highest-risk counterparties?')">Highest-risk parties</span>
+    <span class="nl-chip" onclick="askQuery('Show me contracts missing standard clauses')">Compliance gaps</span>
+  </div>
+  <div class="nl-convo" id="nlConvo"></div>
+  <div class="nl-input-row">
+    <input class="nl-input" id="nlInput" placeholder="Ask anything about your contracts…" onkeydown="if(event.key==='Enter')sendNL()">
+    <button class="nl-send" onclick="sendNL()">↑</button>
+  </div>
 </div>
 
-<!-- Agreement modal -->
+<!-- ══ AGREEMENT MODAL ══ -->
 <div class="modal-overlay" id="agreementModal" onclick="if(event.target===this)closeModal()">
   <div class="modal-box">
     <div class="modal-header">
@@ -456,92 +608,114 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; f
   </div>
 </div>
 
+<!-- ══ SEND FOR SIGNATURE MODAL ══ -->
+<div class="modal-overlay" id="sigModal" onclick="if(event.target===this)closeSigModal()">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div><div class="modal-title" id="sigModalTitle">Send for Renewal Signature</div><div class="modal-sub" id="sigModalSub"></div></div>
+      <button class="modal-close" onclick="closeSigModal()">&#x2715;</button>
+    </div>
+    <div class="modal-body" id="sigModalBody"></div>
+  </div>
+</div>
+
 <script>
 // ── Sample data ──
 const SAMPLE_AGREEMENTS = [
-  {id:'orion',   cp:'Orion Logistics',    type:'MSA',              title:'Master Services Agreement', exp:'2026-07-02', noticeDeadline:'2026-06-02', noticeDays:30, d:7,   status:'urgent',    val:'$1,200,000', renewal:'Auto-renew', payment:'Net 60',  liability:'None',     jurisdiction:'New York'},
-  {id:'vertex',  cp:'Vertex Cloud',       type:'SaaS Subscription',title:'SaaS Subscription',         exp:'2026-07-05', noticeDeadline:'2026-06-15', noticeDays:20, d:10,  status:'urgent',    val:'$480,000',   renewal:'Auto-renew', payment:'Net 30',  liability:'2 years',  jurisdiction:'California'},
-  {id:'meridian',cp:'Meridian Partners',  type:'MSA',              title:'Master Services Agreement', exp:'2026-07-18', noticeDeadline:'2026-06-18', noticeDays:30, d:23,  status:'upcoming',  val:'$1,700,000', renewal:'Auto-renew', payment:'Net 60',  liability:'None',     jurisdiction:'Delaware'},
-  {id:'apex',    cp:'Apex Data Services', type:'Services',         title:'Support Services Agreement',exp:'2026-07-22', noticeDeadline:'2026-06-07', noticeDays:45, d:-18, status:'window_open',val:'$690,000',  renewal:'Auto-renew', payment:'Net 30',  liability:'1 year',   jurisdiction:'Texas'},
-  {id:'clearwater',cp:'Clearwater Tech',  type:'License',          title:'Enterprise License',        exp:'2026-07-16', noticeDeadline:'2026-06-16', noticeDays:30, d:21,  status:'upcoming',  val:'$295,000',   renewal:'Auto-renew', payment:'Net 30',  liability:'None',     jurisdiction:'California'},
-  {id:'blueshore',cp:'Blueshore Capital', type:'SOW',              title:'Professional Services',     exp:'2026-07-23', noticeDeadline:'2026-06-23', noticeDays:30, d:28,  status:'upcoming',  val:'$520,000',   renewal:'Fixed term', payment:'Net 30',  liability:'2 years',  jurisdiction:'New York'},
-  {id:'pantera', cp:'Pantera Inc',        type:'SaaS Subscription',title:'SaaS License',              exp:'2026-07-25', noticeDeadline:'2026-06-10', noticeDays:15, d:-15, status:'window_open',val:'$210,000',  renewal:'Auto-renew', payment:'Net 90',  liability:'6 months', jurisdiction:'Florida'},
-  {id:'redstone',cp:'Redstone Systems',   type:'License',          title:'Software License',          exp:'2026-07-09', noticeDeadline:'2026-05-25', noticeDays:45, d:-31, status:'window_open',val:'$150,000',  renewal:'No renewal', payment:'Net 30',  liability:'1 year',   jurisdiction:'Illinois'},
+  {id:'orion',     cp:'Orion Logistics',    type:'MSA',              title:'Master Services Agreement',   exp:'2026-07-02',noticeDeadline:'2026-06-02',noticeDays:30,d:7,   status:'urgent',     val:'$1,200,000',renewal:'Auto-renew',payment:'Net 60',liability:'None',    jurisdiction:'New York',     email:'procurement@orionlogistics.com'},
+  {id:'vertex',    cp:'Vertex Cloud',       type:'SaaS Subscription',title:'SaaS Subscription',           exp:'2026-07-05',noticeDeadline:'2026-06-15',noticeDays:20,d:10,  status:'urgent',     val:'$480,000',  renewal:'Auto-renew',payment:'Net 30',liability:'2 years', jurisdiction:'California',   email:'contracts@vertexcloud.io'},
+  {id:'meridian',  cp:'Meridian Partners',  type:'MSA',              title:'Master Services Agreement',   exp:'2026-07-18',noticeDeadline:'2026-06-18',noticeDays:30,d:23,  status:'upcoming',   val:'$1,700,000',renewal:'Auto-renew',payment:'Net 60',liability:'None',    jurisdiction:'Delaware',     email:'legal@meridianpartners.com'},
+  {id:'apex',      cp:'Apex Data Services', type:'Services',         title:'Support Services Agreement',  exp:'2026-07-22',noticeDeadline:'2026-06-07',noticeDays:45,d:-18, status:'window_open',val:'$690,000',  renewal:'Auto-renew',payment:'Net 30',liability:'1 year',  jurisdiction:'Texas',        email:'vendor@apexdata.com'},
+  {id:'clearwater',cp:'Clearwater Tech',    type:'License',          title:'Enterprise License Agreement', exp:'2026-07-16',noticeDeadline:'2026-06-16',noticeDays:30,d:21,  status:'upcoming',   val:'$295,000',  renewal:'Auto-renew',payment:'Net 30',liability:'None',    jurisdiction:'California',   email:'legal@clearwatertech.com'},
+  {id:'blueshore', cp:'Blueshore Capital',  type:'SOW',              title:'Professional Services',       exp:'2026-07-23',noticeDeadline:'2026-06-23',noticeDays:30,d:28,  status:'upcoming',   val:'$520,000',  renewal:'Fixed term',payment:'Net 30',liability:'2 years', jurisdiction:'New York',     email:'ops@blueshorecapital.com'},
+  {id:'pantera',   cp:'Pantera Inc',        type:'SaaS Subscription',title:'SaaS License',                exp:'2026-07-25',noticeDeadline:'2026-06-10',noticeDays:15,d:-15, status:'window_open',val:'$210,000',  renewal:'Auto-renew',payment:'Net 90',liability:'6 months',jurisdiction:'Florida',      email:'procurement@pantera.io'},
+  {id:'redstone',  cp:'Redstone Systems',   type:'License',          title:'Software License',            exp:'2026-07-09',noticeDeadline:'2026-05-25',noticeDays:45,d:-31, status:'window_open',val:'$150,000',  renewal:'No renewal',payment:'Net 30',liability:'1 year',  jurisdiction:'Illinois',     email:'legal@redstonesys.com'},
 ];
+
+const AI_BRIEFS = {
+  orion:     'This MSA governs a logistics services relationship with Orion Logistics valued at $1.2M annually. Key terms include a Net 60 payment schedule, 30-day auto-renewal notice, and notably <strong>no limitation of liability clause</strong>. The contract also lacks a Data Processing Addendum, creating GDPR/CCPA exposure. Orion is our single largest counterparty by value.',
+  vertex:    'SaaS subscription for cloud infrastructure services. The contract includes standard liability protections (2-year cap) and a DPA, but the <strong>20-day renewal notice period is below our standard 30-day threshold</strong>. This means the opt-out window may already be closing. Force majeure clause is absent.',
+  meridian:  'Long-standing MSA with Meridian Partners, one of our top-3 counterparties by value. <strong>No liability cap</strong> and no DPA are the primary risk flags. Payment terms of Net 60 are non-standard. The auto-renew notice window closes Jun 18 — immediate decision required.',
+  apex:      'Support services agreement with Apex Data Services. <strong>The 45-day notice period means the opt-out window closed 18 days ago</strong> — this contract will auto-renew unless immediate escalation occurs. Missing DPA and force majeure clause.',
+  clearwater:'Enterprise license for software tooling. Notably missing a liability cap, which creates uncapped exposure on a $295K contract. DPA and data security standards are also absent. Notice window closes Jun 16.',
+  blueshore: 'Professional services SOW. Fixed-term renewal with a solid liability cap (2 years). The only gap is a missing Data Processing Addendum. Lowest risk profile among expiring contracts this quarter.',
+  pantera:   'SaaS license with non-standard terms throughout: <strong>Net 90 payment (3x standard), 15-day notice period (below threshold)</strong>, and missing governing law clause. The notice window closed 15 days ago. Recommend legal review before any renewal.',
+  redstone:  'Software license with no renewal clause — this contract terminates at expiry on Jul 9 with no automatic continuation. Missing DPA, force majeure, and data security standards. Good candidate for non-renewal given the exit flag in pipeline.',
+};
+
+const NL_RESPONSES = {
+  'Which contracts auto-renew in the next 60 days?': '5 contracts auto-renew in the next 60 days:\n• Orion Logistics MSA — Jul 2 ($1.2M) ⚠️ notice expired\n• Vertex Cloud SaaS — Jul 5 ($480K) ⚠️ 10d window\n• Clearwater Tech License — Jul 16 ($295K)\n• Meridian Partners MSA — Jul 18 ($1.7M)\n• Apex Data Services — Jul 22 ($690K) ⚠️ notice expired\n\nTotal at-risk auto-renewal value: $4.37M',
+  'What is our total unmanaged spend exposure?': 'Unmanaged spend exposure breakdown:\n• No liability cap: $3.2M (Orion, Meridian, Clearwater)\n• Missing DPA: $4.1M across 5 contracts\n• Non-standard payment terms: $2.9M\n• Notice windows already closed: $840K\n\nTotal unmanaged exposure: ~$6.1M across 8 active contracts.',
+  'Which contracts are missing liability caps?': '3 contracts have no limitation of liability clause:\n• Orion Logistics MSA — $1.2M (highest risk)\n• Meridian Partners MSA — $1.7M (highest risk)\n• Clearwater Tech License — $295K\n\nCombined uncapped exposure: $3.2M. Recommend adding liability caps during next renewal cycle.',
+  'Who are our highest-risk counterparties?': 'Counterparties ranked by combined risk score:\n1. Orion Logistics — 3 compliance gaps, $1.2M, expiring Jul 2\n2. Meridian Partners — 3 compliance gaps, $1.7M, notice closing\n3. Apex Data Services — 3 compliance gaps, $690K, notice expired\n4. Pantera Inc — non-standard payment + notice terms\n5. Clearwater Tech — no liability cap, no DPA',
+  'Show me contracts missing standard clauses': 'Compliance gap summary (19 total gaps):\n• Liability cap missing: Orion, Meridian, Clearwater (3)\n• DPA missing: Orion, Meridian, Apex, Clearwater, Blueshore, Redstone (6)\n• Force majeure missing: Vertex, Apex, Pantera, Redstone (4)\n• Data security standards missing: Orion, Meridian, Apex, Clearwater, Redstone (5)\n• Governing law missing: Pantera (1)\n\nSee the Audit tab → Compliance Gap Tracker for the full matrix.',
+  'Which contracts are expiring in the next 7 days?': '3 contracts expire within 7 days:\n• Orion Logistics MSA — Jul 2, 2026 ($1.2M) ⚠️ URGENT\n• Vertex Cloud SaaS — Jul 5, 2026 ($480K) ⚠️ URGENT\n• Redstone Systems License — Jul 9, 2026 ($150K)\n\nTotal value expiring in 7 days: $1.83M. Immediate action required on Orion Logistics and Vertex Cloud.',
+};
 
 let obFilterState = {search:'',status:'all',type:'all',cp:'all'};
 let riskChartsInited = false;
 let forecastChartInst = null;
+let currentPersona = 'all';
+let beforeMode = false;
 
-// Base data for forecast (same as portfolio total)
 const BASE_PORTFOLIO = 13400000;
-// Monthly expiry amounts derived from sample agreements
 const MONTHLY_EXPIRY = {
-  'Jul 26': 1200000+480000+150000, // orion+vertex+redstone
-  'Aug 26': 0,
-  'Sep 26': 520000,                // blueshore
-  'Oct 26': 690000+295000+210000,  // apex+clearwater+pantera
-  'Nov 26': 0, 'Dec 26': 0, 'Jan 27': 850000, 'Feb 27': 0,
-  'Mar 27': 1700000,               // meridian renewal
-  'Apr 27': 600000, 'May 27': 0, 'Jun 27': 480000,
+  'Jul 26':1200000+480000+150000,'Aug 26':0,'Sep 26':520000,
+  'Oct 26':690000+295000+210000,'Nov 26':0,'Dec 26':0,'Jan 27':850000,
+  'Feb 27':0,'Mar 27':1700000,'Apr 27':600000,'May 27':0,'Jun 27':480000,
 };
-const FORECAST_MONTHS = ['Jun 26','Jul 26','Aug 26','Sep 26','Oct 26','Nov 26','Dec 26','Jan 27','Feb 27','Mar 27','Apr 27','May 27','Jun 27'];
+const FORECAST_MONTHS=['Jun 26','Jul 26','Aug 26','Sep 26','Oct 26','Nov 26','Dec 26','Jan 27','Feb 27','Mar 27','Apr 27','May 27','Jun 27'];
 
-function updateForecast() { renderForecastChart(); }
-
-function renderForecastChart() {
-  const bestRate     = parseFloat(document.getElementById('fc-best')?.value    ?? 120) / 100;
-  const expectedRate = parseFloat(document.getElementById('fc-expected')?.value ?? 70)  / 100;
-  const worstRate    = parseFloat(document.getElementById('fc-worst')?.value   ?? 0)   / 100;
-  let best=BASE_PORTFOLIO, expected=BASE_PORTFOLIO, worst=BASE_PORTFOLIO;
-  const bestLine=[best], expLine=[expected], worstLine=[worst];
-  FORECAST_MONTHS.slice(1).forEach(mo=>{
-    const exp = MONTHLY_EXPIRY[mo]||0;
-    best     = Math.max(0, best     + exp * (bestRate     - 1));
-    expected = Math.max(0, expected + exp * (expectedRate - 1));
-    worst    = Math.max(0, worst    + exp * (worstRate    - 1));
-    bestLine.push(best); expLine.push(expected); worstLine.push(worst);
-  });
-  if(forecastChartInst){forecastChartInst.destroy();forecastChartInst=null;}
-  forecastChartInst = new Chart(document.getElementById('forecastChart'),{
-    type:'line',
-    data:{
-      labels:FORECAST_MONTHS,
-      datasets:[
-        {label:`Best (${Math.round(bestRate*100)}%)`,     data:bestLine, borderColor:'#16a34a',backgroundColor:'rgba(22,163,74,0.07)', fill:true,tension:0.3,pointRadius:2,borderWidth:2},
-        {label:`Expected (${Math.round(expectedRate*100)}%)`,data:expLine,borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,0.05)',fill:true,tension:0.3,pointRadius:2,borderWidth:2,borderDash:[5,3]},
-        {label:`Worst (${Math.round(worstRate*100)}%)`,   data:worstLine,borderColor:'#dc2626',backgroundColor:'rgba(220,38,38,0.05)',fill:true,tension:0.3,pointRadius:2,borderWidth:2},
-      ]
-    },
-    options:{
-      responsive:true,maintainAspectRatio:false,
-      interaction:{mode:'index',intersect:false},
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>` ${ctx.dataset.label}: $${Math.round(ctx.raw/100000)/10}M`}}},
-      scales:{
-        y:{beginAtZero:false,ticks:{callback:v=>'$'+Math.round(v/100000)/10+'M',font:{size:10}},grid:{color:'#f0f0ee'}},
-        x:{ticks:{font:{size:10}},grid:{display:false}}
-      }
-    }
-  });
+// ── Persona switcher ──
+function setPersona(persona, btn) {
+  currentPersona = persona;
+  document.querySelectorAll('.persona-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const banner = document.getElementById('personaBanner');
+  document.querySelectorAll('.metric-card').forEach(c=>{c.classList.remove('persona-highlight');c.classList.remove('legal');c.classList.remove('ops');});
+  banner.className = 'persona-banner';
+  banner.style.display = 'none';
+  if (persona === 'cfo') {
+    banner.className = 'persona-banner cfo';
+    banner.innerHTML = '💼 <strong>CFO View</strong> — Highlighting financial exposure, portfolio value, and renewal forecast';
+    ['mc-exposure','mc-risk-total','mc-risk-nocap','mc-risk-autorenew'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.add('persona-highlight');});
+    switchTabById('risk');
+  } else if (persona === 'legal') {
+    banner.className = 'persona-banner legal';
+    banner.innerHTML = '⚖️ <strong>Legal View</strong> — Highlighting compliance gaps, non-standard terms, and missing clauses';
+    document.querySelectorAll('.metric-card').forEach(c=>{});
+    ['mc-exposure','mc-risk-nocap'].forEach(id=>{const el=document.getElementById(id);if(el){el.classList.add('persona-highlight');el.classList.add('legal');}});
+    switchTabById('audit');
+  } else if (persona === 'ops') {
+    banner.className = 'persona-banner ops';
+    banner.innerHTML = '🗂 <strong>Ops View</strong> — Highlighting renewal deadlines, notice windows, and pipeline status';
+    ['mc-expiring','mc-week','mc-autorenew'].forEach(id=>{const el=document.getElementById(id);if(el){el.classList.add('persona-highlight');el.classList.add('ops');}});
+    switchTabById('pipeline');
+  }
 }
 
-// ── Overview charts — only init the visible tab on load ──
-window.addEventListener('load', () => {
-  new Chart(document.getElementById('renewalChart'),{type:'doughnut',data:{labels:['Auto-renew','Fixed term','No renewal','Evergreen'],datasets:[{data:[22,16,6,3],backgroundColor:['#2563eb','#16a34a','#9ca3af','#d97706'],borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{position:'bottom',labels:{font:{size:10},boxWidth:9,padding:6}}}}});
-  new Chart(document.getElementById('timelineChart'),{type:'bar',data:{labels:['Jul 26','Aug 26','Sep 26','Oct 26'],datasets:[{data:[8,5,4,3],backgroundColor:'#2563eb',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{stepSize:1,font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
-  new Chart(document.getElementById('partyChart'),{type:'bar',data:{labels:['Orion Logistics','Meridian Partners','Vertex Cloud','Clearwater Tech','Apex Data Services'],datasets:[{data:[3,2,2,1,1],backgroundColor:'#7c3aed',borderRadius:3}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{stepSize:1,font:{size:10}}},y:{ticks:{font:{size:10}}}}}});
-});
+function switchTabById(name) {
+  const tabEl = document.getElementById('tab-'+name);
+  if (tabEl) switchTab(name, tabEl);
+}
 
-// Table runs immediately — no chart dependency
-drawObTable();
-
-// ── Risk tab charts — lazy init on first visit ──
-function initRiskCharts() {
-  if(riskChartsInited) return;
-  riskChartsInited = true;
-  new Chart(document.getElementById('spendChart'),{type:'bar',data:{labels:['MSA','SaaS','SOW','License','Services'],datasets:[{data:[3900000,690000,520000,445000,690000],backgroundColor:['#2563eb','#16a34a','#d97706','#7c3aed','#9ca3af'],borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>' $'+Math.round(ctx.raw/1000)+'K'}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>'$'+Math.round(v/1000)+'K',font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
-  new Chart(document.getElementById('valueChart'),{type:'line',data:{labels:['Jan 25','Apr 25','Jul 25','Oct 25','Jan 26','Apr 26'],datasets:[{data:[6200000,7800000,9100000,10400000,12000000,13400000],borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,0.07)',fill:true,tension:0.3,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>' $'+Math.round(ctx.raw/1000000*10)/10+'M'}}},scales:{y:{beginAtZero:false,ticks:{callback:v=>'$'+Math.round(v/1000000*10)/10+'M',font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
-  renderForecastChart();
+// ── Before/After toggle ──
+function toggleBeforeAfter() {
+  beforeMode = !beforeMode;
+  const toggle = document.getElementById('baToggle');
+  const beforeView = document.getElementById('before-view');
+  const dashView = document.getElementById('dashboard-view');
+  if (beforeMode) {
+    beforeView.classList.add('active');
+    dashView.classList.add('hidden');
+    toggle.innerHTML = '<span class="ba-dot" style="background:#16a34a"></span> Show: After';
+    toggle.classList.add('after');
+  } else {
+    beforeView.classList.remove('active');
+    dashView.classList.remove('hidden');
+    toggle.innerHTML = '<span class="ba-dot"></span> Show: Before';
+    toggle.classList.remove('after');
+  }
 }
 
 // ── Tab switching ──
@@ -553,14 +727,50 @@ function switchTab(name, btn) {
   if(name==='risk') initRiskCharts();
 }
 
-// ── Range selector (visual only in demo) ──
-function setRange(days, btn) {
-  document.querySelectorAll('.range-tab').forEach(t=>t.classList.remove('active'));
-  btn.classList.add('active');
+function setRange(days,btn){document.querySelectorAll('.range-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');}
+
+// ── Forecast ──
+function updateForecast(){renderForecastChart();}
+function renderForecastChart(){
+  const bestRate=parseFloat(document.getElementById('fc-best')?.value??120)/100;
+  const expectedRate=parseFloat(document.getElementById('fc-expected')?.value??70)/100;
+  const worstRate=parseFloat(document.getElementById('fc-worst')?.value??0)/100;
+  let best=BASE_PORTFOLIO,expected=BASE_PORTFOLIO,worst=BASE_PORTFOLIO;
+  const bestLine=[best],expLine=[expected],worstLine=[worst];
+  FORECAST_MONTHS.slice(1).forEach(mo=>{
+    const exp=MONTHLY_EXPIRY[mo]||0;
+    best=Math.max(0,best+exp*(bestRate-1));
+    expected=Math.max(0,expected+exp*(expectedRate-1));
+    worst=Math.max(0,worst+exp*(worstRate-1));
+    bestLine.push(best);expLine.push(expected);worstLine.push(worst);
+  });
+  if(forecastChartInst){forecastChartInst.destroy();forecastChartInst=null;}
+  forecastChartInst=new Chart(document.getElementById('forecastChart'),{type:'line',data:{labels:FORECAST_MONTHS,datasets:[
+    {label:`Best (${Math.round(bestRate*100)}%)`,data:bestLine,borderColor:'#16a34a',backgroundColor:'rgba(22,163,74,0.07)',fill:true,tension:0.3,pointRadius:2,borderWidth:2},
+    {label:`Expected (${Math.round(expectedRate*100)}%)`,data:expLine,borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,0.05)',fill:true,tension:0.3,pointRadius:2,borderWidth:2,borderDash:[5,3]},
+    {label:`Worst (${Math.round(worstRate*100)}%)`,data:worstLine,borderColor:'#dc2626',backgroundColor:'rgba(220,38,38,0.05)',fill:true,tension:0.3,pointRadius:2,borderWidth:2},
+  ]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>` ${ctx.dataset.label}: $${Math.round(ctx.raw/100000)/10}M`}}},scales:{y:{beginAtZero:false,ticks:{callback:v=>'$'+Math.round(v/100000)/10+'M',font:{size:10}},grid:{color:'#f0f0ee'}},x:{ticks:{font:{size:10}},grid:{display:false}}}}});
+}
+
+// ── Overview charts ──
+window.addEventListener('load',()=>{
+  new Chart(document.getElementById('renewalChart'),{type:'doughnut',data:{labels:['Auto-renew','Fixed term','No renewal','Evergreen'],datasets:[{data:[22,16,6,3],backgroundColor:['#2563eb','#16a34a','#9ca3af','#d97706'],borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{position:'bottom',labels:{font:{size:10},boxWidth:9,padding:6}}}}});
+  new Chart(document.getElementById('timelineChart'),{type:'bar',data:{labels:['Jul 26','Aug 26','Sep 26','Oct 26'],datasets:[{data:[8,5,4,3],backgroundColor:'#2563eb',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{stepSize:1,font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
+  new Chart(document.getElementById('partyChart'),{type:'bar',data:{labels:['Orion Logistics','Meridian Partners','Vertex Cloud','Clearwater Tech','Apex Data Services'],datasets:[{data:[3,2,2,1,1],backgroundColor:'#7c3aed',borderRadius:3}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{stepSize:1,font:{size:10}}},y:{ticks:{font:{size:10}}}}}});
+});
+drawObTable();
+
+// ── Risk charts ──
+function initRiskCharts(){
+  if(riskChartsInited)return;
+  riskChartsInited=true;
+  new Chart(document.getElementById('spendChart'),{type:'bar',data:{labels:['MSA','SaaS','SOW','License','Services'],datasets:[{data:[3900000,690000,520000,445000,690000],backgroundColor:['#2563eb','#16a34a','#d97706','#7c3aed','#9ca3af'],borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>' $'+Math.round(ctx.raw/1000)+'K'}}},scales:{y:{beginAtZero:true,ticks:{callback:v=>'$'+Math.round(v/1000)+'K',font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
+  new Chart(document.getElementById('valueChart'),{type:'line',data:{labels:['Jan 25','Apr 25','Jul 25','Oct 25','Jan 26','Apr 26'],datasets:[{data:[6200000,7800000,9100000,10400000,12000000,13400000],borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,0.07)',fill:true,tension:0.3,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>' $'+Math.round(ctx.raw/1000000*10)/10+'M'}}},scales:{y:{beginAtZero:false,ticks:{callback:v=>'$'+Math.round(v/1000000*10)/10+'M',font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
+  renderForecastChart();
 }
 
 // ── Obligations table ──
-function drawObTable() {
+function drawObTable(){
   let rows=SAMPLE_AGREEMENTS.filter(a=>{
     if(obFilterState.status!=='all'&&a.status!==obFilterState.status)return false;
     if(obFilterState.type!=='all'&&a.type!==obFilterState.type)return false;
@@ -568,7 +778,7 @@ function drawObTable() {
     if(obFilterState.search){const q=obFilterState.search.toLowerCase();return a.cp.toLowerCase().includes(q)||a.title.toLowerCase().includes(q)||a.type.toLowerCase().includes(q);}
     return true;
   });
-  const statusBadge=a=>({urgent:'<span class="badge badge-red">Urgent</span>',upcoming:'<span class="badge badge-yellow">Upcoming</span>',window_open:'<span class="badge badge-blue">Window open</span>',expired:'<span class="badge badge-gray">Expired</span>'}[a.status]||'');
+  const statusBadge=a=>({urgent:'<span class="badge badge-red">Urgent</span>',upcoming:'<span class="badge badge-yellow">Upcoming</span>',window_open:'<span class="badge badge-blue">Window open</span>'}[a.status]||'');
   document.getElementById('obBody').innerHTML=rows.map(a=>`<tr>
     <td><div class="ob-td-name-main">${a.cp}</div><div class="ob-td-name-sub">${a.title}</div></td>
     <td><span class="chip">${a.type}</span></td>
@@ -578,7 +788,7 @@ function drawObTable() {
     <td style="color:#888;">${a.noticeDays}d</td>
     <td>${a.val}</td>
     <td>${statusBadge(a)}</td>
-    <td><button class="btn-view" onclick="openModal('${a.id}')">View</button></td>
+    <td style="display:flex;gap:4px;"><button class="btn-view" onclick="openModal('${a.id}')">View</button><button class="btn-view" style="color:#16a34a;border-color:#86efac;" onclick="openSigModal('${a.id}')">Sign</button></td>
   </tr>`).join('');
   document.getElementById('obCount').textContent=rows.length+' of '+SAMPLE_AGREEMENTS.length+' agreements';
 }
@@ -587,26 +797,128 @@ function filterObStatus(v){obFilterState.status=v;drawObTable();}
 function filterObType(v){obFilterState.type=v;drawObTable();}
 function filterObCp(v){obFilterState.cp=v;drawObTable();}
 
-// ── Modal ──
-const MODAL_DATA = {
-  orion:     {title:'Master Services Agreement',sub:'Orion Logistics · Expires Jul 2, 2026',fields:[['Type','MSA'],['Counterparty','Orion Logistics'],['Effective date','Jan 15, 2024'],['Expiration date','Jul 2, 2026'],['Contract value','$1,200,000'],['Payment terms','Net 60'],['Renewal type','Auto-renew'],['Renewal notice','30 days'],['Liability cap','None'],['Jurisdiction','New York']]},
-  vertex:    {title:'SaaS Subscription',sub:'Vertex Cloud · Expires Jul 5, 2026',fields:[['Type','SaaS Subscription'],['Counterparty','Vertex Cloud'],['Effective date','Jul 5, 2024'],['Expiration date','Jul 5, 2026'],['Contract value','$480,000'],['Payment terms','Net 30'],['Renewal type','Auto-renew'],['Renewal notice','20 days'],['Liability cap','2 years'],['Jurisdiction','California']]},
-  meridian:  {title:'Master Services Agreement',sub:'Meridian Partners · Expires Jul 18, 2026',fields:[['Type','MSA'],['Counterparty','Meridian Partners'],['Effective date','Jul 18, 2023'],['Expiration date','Jul 18, 2026'],['Contract value','$1,700,000'],['Payment terms','Net 60'],['Renewal type','Auto-renew'],['Renewal notice','30 days'],['Liability cap','None'],['Jurisdiction','Delaware']]},
-  apex:      {title:'Support Services Agreement',sub:'Apex Data Services · Expires Jul 22, 2026',fields:[['Type','Services'],['Counterparty','Apex Data Services'],['Effective date','Jul 22, 2024'],['Expiration date','Jul 22, 2026'],['Contract value','$690,000'],['Payment terms','Net 30'],['Renewal type','Auto-renew'],['Renewal notice','45 days'],['Liability cap','1 year'],['Jurisdiction','Texas']]},
-  clearwater:{title:'Enterprise License Agreement',sub:'Clearwater Tech · Expires Jul 16, 2026',fields:[['Type','License'],['Counterparty','Clearwater Tech'],['Effective date','Jul 16, 2024'],['Expiration date','Jul 16, 2026'],['Contract value','$295,000'],['Payment terms','Net 30'],['Renewal type','Auto-renew'],['Renewal notice','30 days'],['Liability cap','None'],['Jurisdiction','California']]},
-  blueshore: {title:'Professional Services Agreement',sub:'Blueshore Capital · Expires Jul 23, 2026',fields:[['Type','SOW'],['Counterparty','Blueshore Capital'],['Effective date','Jul 23, 2024'],['Expiration date','Jul 23, 2026'],['Contract value','$520,000'],['Payment terms','Net 30'],['Renewal type','Fixed term'],['Renewal notice','30 days'],['Liability cap','2 years'],['Jurisdiction','New York']]},
-  pantera:   {title:'SaaS License',sub:'Pantera Inc · Expires Jul 25, 2026',fields:[['Type','SaaS Subscription'],['Counterparty','Pantera Inc'],['Effective date','Jul 25, 2024'],['Expiration date','Jul 25, 2026'],['Contract value','$210,000'],['Payment terms','Net 90'],['Renewal type','Auto-renew'],['Renewal notice','15 days'],['Liability cap','6 months'],['Jurisdiction','Florida']]},
-  redstone:  {title:'Software License',sub:'Redstone Systems · Expires Jul 9, 2026',fields:[['Type','License'],['Counterparty','Redstone Systems'],['Effective date','Jul 9, 2023'],['Expiration date','Jul 9, 2026'],['Contract value','$150,000'],['Payment terms','Net 30'],['Renewal type','No renewal'],['Renewal notice','45 days'],['Liability cap','1 year'],['Jurisdiction','Illinois']]},
-};
-function openModal(id) {
-  const d=MODAL_DATA[id]; if(!d)return;
-  document.getElementById('modalTitle').textContent=d.title;
-  document.getElementById('modalSub').textContent=d.sub;
-  document.getElementById('modalBody').innerHTML=`<div class="kv-grid">${d.fields.map(([k,v])=>`<div><div class="kv-label">${k}</div><div class="kv-value">${v}</div></div>`).join('')}</div>
-  <div style="margin-top:14px;padding-top:12px;border-top:1px solid #f0f0ee;font-size:11px;color:#888;font-style:italic;">Live version links directly to DocuSign Navigator for full document access.</div>`;
+// ── Agreement modal ──
+function openModal(id){
+  const a=SAMPLE_AGREEMENTS.find(x=>x.id===id); if(!a)return;
+  const brief=AI_BRIEFS[id]||'';
+  document.getElementById('modalTitle').textContent=a.title;
+  document.getElementById('modalSub').textContent=a.cp+' · Expires '+a.exp;
+  document.getElementById('modalBody').innerHTML=`
+    <div class="kv-grid">
+      <div><div class="kv-label">Type</div><div class="kv-value">${a.type}</div></div>
+      <div><div class="kv-label">Counterparty</div><div class="kv-value">${a.cp}</div></div>
+      <div><div class="kv-label">Expiration date</div><div class="kv-value">${a.exp}</div></div>
+      <div><div class="kv-label">Contract value</div><div class="kv-value">${a.val}</div></div>
+      <div><div class="kv-label">Payment terms</div><div class="kv-value ${a.payment!=='Net 30'?'':''}"><span style="${a.payment!=='Net 30'?'color:#dc2626':''}">${a.payment}</span></div></div>
+      <div><div class="kv-label">Renewal type</div><div class="kv-value">${a.renewal}</div></div>
+      <div><div class="kv-label">Notice period</div><div class="kv-value ${a.noticeDays<30?'':''}"><span style="${a.noticeDays<30?'color:#dc2626':''}">${a.noticeDays}d</span></div></div>
+      <div><div class="kv-label">Liability cap</div><div class="kv-value"><span style="${a.liability==='None'?'color:#dc2626':''}">${a.liability}</span></div></div>
+      <div><div class="kv-label">Jurisdiction</div><div class="kv-value">${a.jurisdiction}</div></div>
+      <div><div class="kv-label">Contact email</div><div class="kv-value">${a.email}</div></div>
+    </div>
+    ${brief?`<div class="ai-brief"><div class="ai-brief-label">🤖 AI Brief</div><div class="ai-brief-text">${brief}</div></div>`:''}
+    <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;">
+      <button class="sig-docusign-btn" style="flex:1;" onclick="closeModal();openSigModal('${id}')">✍️ Send Renewal for Signature via DocuSign</button>
+    </div>
+    <div style="margin-top:8px;font-size:11px;color:#aaa;text-align:center;">Powered by DocuSign MCP · Agreement data extracted by Claude AI</div>`;
   document.getElementById('agreementModal').classList.add('open');
 }
 function closeModal(){document.getElementById('agreementModal').classList.remove('open');}
+
+// ── Send for signature modal ──
+function openSigModal(id){
+  const a=SAMPLE_AGREEMENTS.find(x=>x.id===id); if(!a)return;
+  document.getElementById('sigModalTitle').textContent='Send Renewal for Signature';
+  document.getElementById('sigModalSub').textContent=a.title+' · '+a.cp;
+  document.getElementById('sigModalBody').innerHTML=`
+    <div class="sig-form" id="sigForm">
+      <div class="sig-field">
+        <div class="sig-label">Document</div>
+        <input class="sig-input" value="${a.title} — Renewal 2026" readonly style="background:#f9fafb;color:#555;">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="sig-field">
+          <div class="sig-label">Recipient 1 — Counterparty</div>
+          <input class="sig-input" value="${a.email}" id="sigRecip1">
+        </div>
+        <div class="sig-field">
+          <div class="sig-label">Recipient 2 — Internal Legal</div>
+          <input class="sig-input" value="legal@fontera.com" id="sigRecip2">
+        </div>
+      </div>
+      <div class="sig-field">
+        <div class="sig-label">Subject</div>
+        <input class="sig-input" value="Action Required: ${a.title} Renewal — Please Review & Sign" id="sigSubject">
+      </div>
+      <div class="sig-field">
+        <div class="sig-label">Message</div>
+        <textarea class="sig-textarea" id="sigMsg">Please review the attached renewal agreement for ${a.cp}. This contract (${a.val}) is set to expire on ${a.exp}. Kindly sign at your earliest convenience to ensure continuity of service.</textarea>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;padding:10px 12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:7px;">
+        <span style="font-size:18px;">🔒</span>
+        <div style="font-size:12px;color:#15803d;">Sent securely via <strong>DocuSign</strong> · eSignature-compliant · Full audit trail</div>
+      </div>
+      <button class="sig-docusign-btn" onclick="sendSignature('${id}')">Send via DocuSign →</button>
+    </div>`;
+  document.getElementById('sigModal').classList.add('open');
+}
+
+function sendSignature(id){
+  const a=SAMPLE_AGREEMENTS.find(x=>x.id===id); if(!a)return;
+  document.getElementById('sigModalBody').innerHTML=`
+    <div class="sig-success">
+      <div class="sig-success-icon">✅</div>
+      <div class="sig-success-title">Sent successfully!</div>
+      <div class="sig-success-text">
+        <strong>${a.title} — ${a.cp}</strong> has been sent for renewal signature via DocuSign.<br><br>
+        Recipients notified:<br>
+        • ${a.email}<br>
+        • legal@fontera.com<br><br>
+        You'll receive a confirmation when all parties have signed. Track the envelope status in DocuSign.<br><br>
+        <span style="font-size:11px;color:#aaa;">Envelope ID: DS-2026-${Math.floor(Math.random()*900000+100000)} · Sent ${new Date().toLocaleTimeString()}</span>
+      </div>
+      <button class="btn btn-primary" style="margin-top:16px;width:100%;" onclick="closeSigModal()">Done</button>
+    </div>`;
+}
+function closeSigModal(){document.getElementById('sigModal').classList.remove('open');}
+
+// ── NL Query panel ──
+let nlOpen = false;
+function toggleNL(){
+  nlOpen=!nlOpen;
+  document.getElementById('nlPanel').classList.toggle('open',nlOpen);
+  if(nlOpen&&document.getElementById('nlConvo').children.length===0){
+    addNLMsg('ai','Hi! I have access to all 47 contracts in your DocuSign repository. Ask me anything — renewals, risk, spend, compliance gaps, or specific counterparties.');
+  }
+}
+function addNLMsg(role,text){
+  const div=document.createElement('div');
+  div.className='nl-msg '+role;
+  div.innerHTML=text.replace(/\n/g,'<br>');
+  document.getElementById('nlConvo').appendChild(div);
+  document.getElementById('nlConvo').scrollTop=9999;
+}
+function askQuery(q){
+  if(!nlOpen)toggleNL();
+  setTimeout(()=>{
+    addNLMsg('user',q);
+    setTimeout(()=>{
+      const resp=NL_RESPONSES[q]||'Great question. Based on your DocuSign repository, let me pull that data... (In the live version, this would query your actual agreements via the DocuSign MCP.)';
+      addNLMsg('ai',resp);
+    },600);
+  },100);
+}
+function sendNL(){
+  const input=document.getElementById('nlInput');
+  const q=input.value.trim();
+  if(!q)return;
+  input.value='';
+  addNLMsg('user',q);
+  setTimeout(()=>{
+    const resp=NL_RESPONSES[q]||'Based on your 47 contracts in DocuSign Navigator: I don\'t have a pre-built answer for that exact query, but in the live version this would query your actual agreement data in real time via the DocuSign MCP + Claude AI.';
+    addNLMsg('ai',resp);
+  },700);
+}
 </script>
 </body>
 </html>
