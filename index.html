@@ -725,6 +725,7 @@ function switchTab(name, btn) {
   document.getElementById('pane-'+name).classList.add('active');
   btn.classList.add('active');
   if(name==='risk') initRiskCharts();
+  if(name==='overview') initOverviewCharts();
 }
 
 function setRange(days,btn){document.querySelectorAll('.range-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');}
@@ -752,12 +753,17 @@ function renderForecastChart(){
   ]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>` ${ctx.dataset.label}: $${Math.round(ctx.raw/100000)/10}M`}}},scales:{y:{beginAtZero:false,ticks:{callback:v=>'$'+Math.round(v/100000)/10+'M',font:{size:10}},grid:{color:'#f0f0ee'}},x:{ticks:{font:{size:10}},grid:{display:false}}}}});
 }
 
-// ── Overview charts ──
-window.addEventListener('load',()=>{
-  new Chart(document.getElementById('renewalChart'),{type:'doughnut',data:{labels:['Auto-renew','Fixed term','No renewal','Evergreen'],datasets:[{data:[22,16,6,3],backgroundColor:['#2563eb','#16a34a','#9ca3af','#d97706'],borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{position:'bottom',labels:{font:{size:10},boxWidth:9,padding:6}}}}});
-  new Chart(document.getElementById('timelineChart'),{type:'bar',data:{labels:['Jul 26','Aug 26','Sep 26','Oct 26'],datasets:[{data:[8,5,4,3],backgroundColor:'#2563eb',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{stepSize:1,font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
-  new Chart(document.getElementById('partyChart'),{type:'bar',data:{labels:['Orion Logistics','Meridian Partners','Vertex Cloud','Clearwater Tech','Apex Data Services'],datasets:[{data:[3,2,2,1,1],backgroundColor:'#7c3aed',borderRadius:3}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{stepSize:1,font:{size:10}}},y:{ticks:{font:{size:10}}}}}});
-});
+// ── Overview charts — init directly (Chart.js already loaded synchronously) ──
+function initOverviewCharts(){
+  if(document.getElementById('renewalChart')._chartInst)return;
+  const rc=new Chart(document.getElementById('renewalChart'),{type:'doughnut',data:{labels:['Auto-renew','Fixed term','No renewal','Evergreen'],datasets:[{data:[22,16,6,3],backgroundColor:['#2563eb','#16a34a','#9ca3af','#d97706'],borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{position:'bottom',labels:{font:{size:10},boxWidth:9,padding:6}}}}});
+  const tc=new Chart(document.getElementById('timelineChart'),{type:'bar',data:{labels:['Jul 26','Aug 26','Sep 26','Oct 26'],datasets:[{data:[8,5,4,3],backgroundColor:'#2563eb',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{stepSize:1,font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
+  const pc=new Chart(document.getElementById('partyChart'),{type:'bar',data:{labels:['Orion Logistics','Meridian Partners','Vertex Cloud','Clearwater Tech','Apex Data Services'],datasets:[{data:[3,2,2,1,1],backgroundColor:'#7c3aed',borderRadius:3}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{stepSize:1,font:{size:10}}},y:{ticks:{font:{size:10}}}}}});
+  document.getElementById('renewalChart')._chartInst=rc;
+}
+// Fire immediately if Chart.js is ready, else on load
+if(typeof Chart!=='undefined'){initOverviewCharts();}
+else{window.addEventListener('load',initOverviewCharts);}
 drawObTable();
 
 // ── Risk charts ──
